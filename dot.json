@@ -1,0 +1,55 @@
+[
+	{
+		"path" : "~/.config/alacritty",
+		"target" : "config"
+	},
+	{
+		"path" : "~/.config/bspwm",
+		"target" : "config"
+	},
+	{
+		"path" : "~/.config/geany",
+		"target" : "config"
+	},
+	{
+		"path" : "~/.config/greenclip.toml",
+		"target" : "config"
+	},
+	{
+		"path" : "~/.config/gtk-3.0",
+		"target" : "config"
+	},
+	{
+		"path" : "~/.config/kitty",
+		"target" : "config"
+	},
+	{
+		"path" : "~/.config/mpd",
+		"target" : "config"
+	}
+	,{
+		"path" : "~/.config/ncmpcpp",
+		"target" : "config"
+	}
+	,{
+		"path" : "~/.config/nvim",
+		"target" : "config"
+	}
+	,{
+		"path" : "~/.config/paru",
+		"target" : "config"
+	}
+	,{
+		"path" : "~/.config/tmux",
+		"target" : "config"
+	}
+	,{
+		"path" : "~/.config/yazi",
+		"target" : "config"
+	}
+	,{
+		"path" : "~/.config/zsh",
+		"target" : "config"
+	}
+
+]
