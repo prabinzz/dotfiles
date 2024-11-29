@@ -25,8 +25,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Default 1 monitor with 6 workspaces
 for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
-    bspc monitor "$monitor" -d '1' '2' '3' '4' '5' '6'
-    #bspc monitor "$monitor" -d '' '' '' '' '' ''
+    bspc monitor "$monitor" -d '1' '2' '3' '4' '5' #bspc monitor "$monitor" -d '' '' '' '' '' ''
 done
 
 ## For two or three monitors configuration see https://github.com/gh0stzk/dotfiles/wiki/Two-or-more-monitors-setup
@@ -81,6 +80,4 @@ pidof -q greenclip || { greenclip daemon & }
 # Launch polkit
 pidof -q polkit-gnome-authentication-agent-1 || { /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & }
 
-# Start one time code
-sh -c 'alacritty --hold -e cat $HOME/.config/bspwm/src/config/FirstMessage.txt && sed -i "/# Start one time code/,/# End one time code/d" ~/.config/bspwm/bspwmrc'
 # End one time code

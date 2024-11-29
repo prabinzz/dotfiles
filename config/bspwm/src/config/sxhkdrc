@@ -22,7 +22,7 @@ super + alt + Return
 	OpenApps --floating
 
 # Application menu
-super + @space
+super + d
 	OpenApps --menu
 
 #####

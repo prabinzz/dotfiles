@@ -1,13 +1,14 @@
-// Rofi colors for Emilia
+// Rofi colors for Yael
 
 * {
     font: "JetBrainsMono NF Bold 9";
-    background: #1A1B26;
-    background-alt: #1A1B26E0;
-    foreground: #c0caf5;
-    selected: #7aa2f7;
-    active: #9ece6a;
-    urgent: #f7768e;
-    
-    img-background: url("~/.config/bspwm/rices/emilia/rofi.webp", width);
+    background: #161616;
+    bg-alt: #212121;
+    background-alt: #161616E0;
+    foreground: #ffffff;
+    selected: #33b1ff;
+    active: #42be65;
+    urgent: #ee5396;
+
+    img-background: url("~/.config/bspwm/rices/yael/rofi.webp", width);
 }
