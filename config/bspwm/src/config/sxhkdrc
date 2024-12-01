@@ -94,6 +94,9 @@ super + alt + s
 super + alt + b
 	OpenApps --bluetooth
 
+super + alt + d
+	OpenApps --usb
+
 # PowerMenu
 super + alt + p
 	OpenApps --powermenu
@@ -137,7 +140,7 @@ super + m
 
 # set the window state
 super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	bspc node -t {tiled,pseudo_tiled,floating,"~fullscreen"}
 
 # set the node flags
 ctrl + alt {m,x,s,p}

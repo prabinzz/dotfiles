@@ -201,6 +201,12 @@
         (label :class "keys" :xalign 0 :text "Change Keyboard Layout")
         (label :class "keys-alt" :xalign 1 :text "Super + Alt + k"))
       (box :orientation "h" :space-evenly "true"
+        (label :class "keys" :xalign 0 :text "Mount usb disks")
+        (label :class "keys-alt" :xalign 1 :text "Super + Alt + d"))
+
+
+
+      (box :orientation "h" :space-evenly "true"
         (label :class "category-apps" :xalign 0.5 :text "Apps")
         (label :text ""))
       (box :orientation "h" :space-evenly "true"
@@ -238,7 +244,10 @@
         (label :class "keys-alt" :xalign 1 :text "ctrl + super + alt + l"))
       (box :orientation "h" :space-evenly "true"
         (label :class "keys" :xalign 0 :text "Kill App")
+        (label :class "keys-alt" :xalign 1 :text "ctrl + super + alt + k"))(box :orientation "h" :space-evenly "true"
+        (label :class "keys" :xalign 0 :text "Kill App")
         (label :class "keys-alt" :xalign 1 :text "ctrl + super + alt + k"))
+
     )
   )
 )

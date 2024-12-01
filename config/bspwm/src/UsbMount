@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# Function to display notifications
+send_notification() {
+  local title="$1"
+  local message="$2"
+  notify-send "$title" "$message"
+}
+
+# List all partitions (only partitions) in the format without tree structure
+partitions=$(lsblk -p -o NAME,TYPE,MOUNTPOINT | grep 'part' | grep '/dev/sdb' | awk '{print $1}' | sed 's/^[[:space:]]*└─//')
+
+# Debugging: Print the detected partitions
+echo "Detected partitions on /dev/sdb: $partitions"
+
+# Check if there are any partitions on /dev/sdb
+if [ -z "$partitions" ]; then
+  send_notification "Error" "No partitions found on /dev/sdb."
+  echo "No partitions found on /dev/sdb."
+  exit 1
+fi
+
+# Use rofi to display the list of partitions and let the user select one
+selected_partition=$(echo "$partitions" | rofi -dmenu -i -p "Select partition to mount:" -theme "~/.config/bspwm/src/rofi-themes/Launcher.rasi")
+
+# If the user cancels, exit
+if [ -z "$selected_partition" ]; then
+  send_notification "Action Cancelled" "No partition selected."
+  echo "No partition selected."
+  exit 1
+fi
+
+# Function to find the next available mount directory under ~/usb
+get_next_mount_point() {
+  local base_dir="$HOME/usb"
+  local counter=1
+  local mount_point
+
+  # Check for the first available mount point (~/usb/1/, ~/usb/2/, etc.)
+  while [ -d "$base_dir/$counter" ]; do
+    # If the directory exists and is already mounted, increment the counter
+    if mount | grep -q "$base_dir/$counter"; then
+      counter=$((counter + 1))
+    else
+      break
+    fi
+  done
+
+  mount_point="$base_dir/$counter"
+  echo "$mount_point"
+}
+
+# Check if the selected partition is already mounted anywhere
+already_mounted=$(mount | grep -o "$selected_partition" | wc -l)
+
+if [ "$already_mounted" -gt 0 ]; then
+  # Find the mount point for the already mounted partition
+  mounted_location=$(mount | grep "$selected_partition" | awk '{print $3}')
+  send_notification "Error" "The partition $selected_partition is already mounted at $mounted_location."
+  echo "The partition $selected_partition is already mounted at $mounted_location. Exiting."
+  exit 0
+fi
+
+# Get the next available mount point
+mount_point=$(get_next_mount_point)
+
+# Create the mount point directory if it doesn't exist
+mkdir -p "$mount_point"
+
+# Use pkexec to mount the selected partition with GUI password prompt
+pkexec mount "$selected_partition" "$mount_point"
+
+# Check if the mount was successful
+if [ $? -eq 0 ]; then
+  send_notification "Success" "Successfully mounted $selected_partition to $mount_point."
+  echo "Successfully mounted $selected_partition to $mount_point"
+else
+  send_notification "Error" "Failed to mount $selected_partition."
+  echo "Failed to mount $selected_partition."
+  dmesg | tail -n 20 # Display kernel logs for troubleshooting
+fi

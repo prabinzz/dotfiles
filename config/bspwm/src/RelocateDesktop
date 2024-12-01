@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get the last desktop on eDP-1
+target_desktop=$(bspc query -D -m eDP-1 | tail -n 1)
+
+# Loop through all HDMI monitors and their desktops
+for monitor in $(bspc query -M --names | grep "^HDMI-"); do
+  for desktop in $(bspc query -D -m "$monitor"); do
+    # Move all nodes from the desktop on HDMI to the last desktop on eDP-1
+    bspc node "$(bspc query -N -d $desktop)" --to-desktop "$target_desktop"
+
+    # Delete the desktop after moving all nodes
+    bspc desktop "$desktop" --remove
+  done
+done
