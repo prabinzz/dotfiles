@@ -13,92 +13,98 @@ WIDGET_DIR="$HOME/.config/bspwm/eww"
 
 case "$1" in
 --menu)
-    rofi -show drun -theme "$HOME"/.config/bspwm/src/rofi-themes/Launcher.rasi
-    ;;
+	rofi -show drun -theme "$HOME"/.config/bspwm/src/rofi-themes/Launcher.rasi
+	;;
 --rice)
-    RiceSelector
-    ;;
+	RiceSelector
+	;;
 --terminal)
-    Term --terminal
-    ;;
+	Term --terminal
+	;;
 --floating)
-    Term --floating
-    ;;
+	Term --floating
+	;;
 --update)
-    Term --update
-    ;;
+	Term --update
+	;;
 --checkupdates)
-    Term --checkupdates
-    ;;
+	Term --checkupdates
+	;;
 --netmanager)
-    NetManagerDM
-    ;;
+	NetManagerDM
+	;;
 --bluetooth)
-    rofi-bluetooth
-    ;;
+	rofi-bluetooth
+	;;
 --clipboard)
-    rofi -modi "clipboard:greenclip print" -theme "$HOME"/.config/bspwm/src/rofi-themes/Clipboard.rasi -show clipboard -run-command '{cmd}'
-    ;;
+	rofi -modi "clipboard:greenclip print" -theme "$HOME"/.config/bspwm/src/rofi-themes/Clipboard.rasi -show clipboard -run-command '{cmd}'
+	;;
 --screenshot)
-    ScreenShoTer
-    ;;
+	ScreenShoTer
+	;;
 --powermenu)
-    PowerMenu
-    ;;
+	PowerMenu
+	;;
 --android)
-    AndroidMount
-    ;;
+	AndroidMount
+	;;
 --keyboard)
-    KeyBoardL
-    ;;
+	KeyBoardL
+	;;
 --yazi)
-    Term --yazi
-    ;;
+	Term --yazi
+	;;
 --nvim)
-    Term --nvim
-    ;;
+	Term --nvim
+	;;
 --music)
-    Term --music
-    ;;
+	Term --music
+	;;
 --fetch)
-    Term --fetch
-    ;;
-    # Apps
+	Term --fetch
+	;;
+	# Apps
 --filemanager)
-    thunar
-    ;;
+	thunar
+	;;
 --browser)
-    firefox
-    ;;
+	firefox
+	;;
 --editor)
-    geany
-    ;;
+	geany
+	;;
 --telegram)
-    telegram-desktop
-    ;;
+	telegram-desktop
+	;;
 --whats)
-    whatsdesk --disable-gpu
-    ;;
+	whatsdesk --disable-gpu
+	;;
 --soundcontrol)
-    pavucontrol
-    ;;
-    # Eww Widgets
+	pavucontrol
+	;;
+	# Eww Widgets
 --KeyHelp)
-    eww -c "$WIDGET_DIR" open --toggle csheet
-    ;;
+	eww -c "$WIDGET_DIR" open --toggle csheet
+	;;
 --usercard)
-    eww -c "$WIDGET_DIR" open --toggle launchermenu
-    ;;
+	eww -c "$WIDGET_DIR" open --toggle launchermenu
+	;;
 --player)
-    eww -c "$WIDGET_DIR" open --toggle music
-    ;;
+	eww -c "$WIDGET_DIR" open --toggle music
+	;;
 --calendar)
-    eww -c "$WIDGET_DIR" open --toggle date
-    ;;
+	eww -c "$WIDGET_DIR" open --toggle date
+	;;
 --usb)
-    UsbMount
-    ;;
+	UsbMount
+	;;
+--vbox)
+	VirtualBoxRun
+	;;
+--relocatedesktop)
+	RelocateDesktop
+	;;
 *)
-    echo "Invalid Option"
-    ;;
+	echo "Invalid Option"
+	;;
 esac

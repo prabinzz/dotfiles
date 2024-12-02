@@ -203,6 +203,9 @@
       (box :orientation "h" :space-evenly "true"
         (label :class "keys" :xalign 0 :text "Mount usb disks")
         (label :class "keys-alt" :xalign 1 :text "Super + Alt + d"))
+      (box :orientation "h" :space-evenly "true"
+        (label :class "keys" :xalign 0 :text "VM run")
+        (label :class "keys-alt" :xalign 1 :text "Super + Alt + v"))
 
 
 

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Get a list of all VM names
+vms=$(vboxmanage list vms | awk -F'"' '{print $2}')
+
+# Let the user select a VM using rofi
+selected_vm=$(echo "$vms" | rofi -dmenu -p "Select VM to launch" -theme "~/.config/bspwm/src/rofi-themes/Android.rasi")
+
+# If no VM is selected, exit and notify
+if [ -z "$selected_vm" ]; then
+	notify-send "VM Launcher" "No VM selected."
+	exit 1
+fi
+
+# Check if the selected VM is already running
+running_vm=$(vboxmanage list runningvms | awk -F'"' '{print $2}' | grep -w "$selected_vm")
+
+if [ -n "$running_vm" ]; then
+	# If the VM is running, try to find the window using wmctrl
+	vm_window=$(wmctrl -l | grep -i "$selected_vm" | awk '{print $1}')
+
+	if [ -n "$vm_window" ]; then
+		# Focus on the window using bspc
+		bspc node "$vm_window" --focus
+		notify-send "VM Launcher" "Switched to VM: $selected_vm"
+	else
+		# If the window was not found, try to give it a bit more time to appear
+		sleep 1
+		vm_window=$(wmctrl -l | grep -i "$selected_vm" | awk '{print $1}')
+
+		if [ -n "$vm_window" ]; then
+			# Focus on the window using bspc
+			bspc node "$vm_window" --focus
+			notify-send "VM Launcher" "Switched to VM: $selected_vm"
+		else
+			notify-send "VM Launcher" "VM window not found for $selected_vm."
+		fi
+	fi
+else
+	# If the VM is not running, start it in normal mode (GUI) instead of headless
+	vboxmanage startvm "$selected_vm" --type gui
+	notify-send "VM Launcher" "Starting VM: $selected_vm"
+fi

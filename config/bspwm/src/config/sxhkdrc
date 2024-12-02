@@ -94,6 +94,10 @@ super + alt + s
 super + alt + b
 	OpenApps --bluetooth
 
+# virtualbox luncher
+super + alt + v 
+	OpenApps --vbox
+# Usb mounter
 super + alt + d
 	OpenApps --usb
 

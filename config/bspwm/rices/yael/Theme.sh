@@ -11,30 +11,29 @@
 #
 
 # Current Rice
-read -r RICE < "$HOME"/.config/bspwm/.rice
+read -r RICE <"$HOME"/.config/bspwm/.rice
 
 # Terminate or reload existing processes if necessary.
 . "${HOME}"/.config/bspwm/src/Process.bash
 
 # Vars config for Yael Rice
 # Bspwm border		# Normal border color	# Focused border color
-BORDER_WIDTH="0"	NORMAL_BC="#33b1ff"		FOCUSED_BC="#42be65"
+BORDER_WIDTH="2" NORMAL_BC="#262626" FOCUSED_BC="#33b1ff"
 
 # Fade true|false	# Shadows true|false	# Corner radius		# Shadow color			# Animations true|false
-P_FADE="true"		P_SHADOWS="true"		P_CORNER_R="6"		SHADOW_C="#000000"		ANIMATIONS="true"
+P_FADE="true" P_SHADOWS="true" P_CORNER_R="6" SHADOW_C="#000000" ANIMATIONS="true"
 
 # (OxoCarbon) colorscheme
-bg="#161616"  fg="#ffffff"
+bg="#161616" fg="#ffffff"
 
-black="#262626"   red="#ee5396"   green="#42be65"   yellow="#ffe97b"
-blackb="#393939"  redb="#ee5396"  greenb="#42be65"  yellowb="#ffe97b"
+black="#262626" red="#ee5396" green="#42be65" yellow="#ffe97b"
+blackb="#393939" redb="#ee5396" greenb="#42be65" yellowb="#ffe97b"
 
-blue="#33b1ff"   magenta="#ff7eb6"   cyan="#3ddbd9"   white="#dde1e6"
-blueb="#33b1ff"  magentab="#ff7eb6"  cyanb="#3ddbd9"  whiteb="#ffffff"
+blue="#33b1ff" magenta="#ff7eb6" cyan="#3ddbd9" white="#dde1e6"
+blueb="#33b1ff" magentab="#ff7eb6" cyanb="#3ddbd9" whiteb="#ffffff"
 
 # Gtk theme vars
-gtk_theme="OxoCarbon-zk"	gtk_icons="Glassy"	gtk_cursor="Qogirr-Dark"	geany_theme="z0mbi3-OxoCarbon"
-
+gtk_theme="OxoCarbon-zk" gtk_icons="Glassy" gtk_cursor="Qogirr-Dark" geany_theme="z0mbi3-OxoCarbon"
 
 # Set bspwm configuration
 set_bspwm_config() {
@@ -84,8 +83,8 @@ cyan = "${cyanb}"
 white = "${whiteb}"
 EOF
 
-  # Set kitty colorscheme
-  cat >"$HOME"/.config/kitty/current-theme.conf <<EOF
+	# Set kitty colorscheme
+	cat >"$HOME"/.config/kitty/current-theme.conf <<EOF
 # The basic colors
 foreground              ${fg}
 background              ${bg}
@@ -146,7 +145,7 @@ color7  ${white}
 color15 ${whiteb}
 EOF
 
-pidof -q kitty && killall -USR1 kitty
+	pidof -q kitty && killall -USR1 kitty
 }
 
 # Set compositor configuration
@@ -284,9 +283,9 @@ set_appearance() {
 }
 
 # Apply Geany Theme
-set_geany(){
+set_geany() {
 	sed -i ${HOME}/.config/geany/geany.conf \
-	-e "s/color_scheme=.*/color_scheme=$geany_theme.conf/g"
+		-e "s/color_scheme=.*/color_scheme=$geany_theme.conf/g"
 }
 
 # Launch theme
