@@ -14,6 +14,7 @@ return {
     { '<leader>e', ':Neotree toggle<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
+    hijack_netrw_behavior = 'open_default',
     filesystem = {
       window = {
         mappings = {
