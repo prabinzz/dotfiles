@@ -23,10 +23,33 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #  ║║║║ ║╠╦╝╠╩╗╚═╗╠═╝╠═╣║  ║╣ ╚═╗
 #  ╚╩╝╚═╝╩╚═╩ ╩╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
 
+# Get the number of connected monitors
+monitor_count=$(xrandr -q | grep -w 'connected' | wc -l)
+
+# Initialize workspace counter
+count=1
+
+# If there are two monitors, assign 5 workspaces to each, else 10 to the single monitor
+if [ "$monitor_count" -eq 2 ]; then
+	for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
+		bspc monitor "$monitor" -d '1' '2' '3' '4' '5'
+	done
+elif [ "$monitor_count" -eq 1 ]; then
+	# Assign 10 workspaces to the single monitor
+	# Loop through all outputs listed by xrandr
+	for output in $(xrandr | grep 'disconnected' | cut -d' ' -f1); do
+		xrandr --output "$output" --off
+	done
+	RelocateDesktop &
+	single_monitor=$(xrandr -q | grep -w 'connected' | cut -d' ' -f1)
+	bspc monitor "$single_monitor" -d '1' '2' '3' '4' '5' '6' '7' '8' '9' '10'
+fi
+
 # Default 1 monitor with 6 workspaces
-for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
-	bspc monitor "$monitor" -d '1' '2' '3' '4' '5' #bspc monitor "$monitor" -d '' '' '' '' '' ''
-done
+# for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
+# 	count += 1
+# 	bspc monitor "$monitor" -d '1' '2' '3' '4' '5' #bspc monitor "$monitor" -d '' '' '' '' '' ''
+# done
 
 ## For two or three monitors configuration see https://github.com/gh0stzk/dotfiles/wiki/Two-or-more-monitors-setup
 
