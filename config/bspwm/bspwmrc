@@ -32,6 +32,7 @@ count=1
 # If there are two monitors, assign 5 workspaces to each, else 10 to the single monitor
 if [ "$monitor_count" -eq 2 ]; then
 	for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
+		xrandr --output "$monitor" --right-of eDP-1
 		bspc monitor "$monitor" -d '1' '2' '3' '4' '5'
 	done
 elif [ "$monitor_count" -eq 1 ]; then

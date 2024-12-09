@@ -17,8 +17,11 @@ return {
     hijack_netrw_behavior = 'open_default',
     filesystem = {
       window = {
+        width = 30,
         mappings = {
           ['\\'] = 'close_window',
+          ['l'] = 'open',
+          ['h'] = 'close_node',
         },
       },
     },

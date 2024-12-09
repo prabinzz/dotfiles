@@ -4,37 +4,70 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
     local harpoon = require 'harpoon'
+    local wk = require 'which-key'
 
     -- REQUIRED
     harpoon:setup()
     -- REQUIRED
 
-    vim.keymap.set('n', '<leader>na', function()
-      harpoon:list():add()
-    end)
-    vim.keymap.set('n', '<leader>nt', function()
-      harpoon.ui:toggle_quick_menu(harpoon:list())
-    end)
-
-    vim.keymap.set('n', '<leader>n1', function()
-      harpoon:list():select(1)
-    end)
-    vim.keymap.set('n', '<leader>n2', function()
-      harpoon:list():select(2)
-    end)
-    vim.keymap.set('n', '<leader>n3', function()
-      harpoon:list():select(3)
-    end)
-    vim.keymap.set('n', '<leader>n4', function()
-      harpoon:list():select(4)
-    end)
-
-    -- Toggle previous & next buffers stored within Harpoon list
-    vim.keymap.set('n', '<leader>np', function()
-      harpoon:list():prev()
-    end)
-    vim.keymap.set('n', '<leader>nn', function()
-      harpoon:list():next()
-    end)
+    wk.add {
+      { '<leader>n', group = 'harpoon' }, -- group for Harpoon commands
+      {
+        '<leader>na',
+        function()
+          harpoon:list():add()
+        end,
+        desc = 'Add current file to Harpoon',
+      },
+      {
+        '<leader>nt',
+        function()
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = 'Toggle Harpoon menu',
+      },
+      {
+        '<leader>n1',
+        function()
+          harpoon:list():select(1)
+        end,
+        desc = 'Select file 1 in Harpoon',
+      },
+      {
+        '<leader>n2',
+        function()
+          harpoon:list():select(2)
+        end,
+        desc = 'Select file 2 in Harpoon',
+      },
+      {
+        '<leader>n3',
+        function()
+          harpoon:list():select(3)
+        end,
+        desc = 'Select file 3 in Harpoon',
+      },
+      {
+        '<leader>n4',
+        function()
+          harpoon:list():select(4)
+        end,
+        desc = 'Select file 4 in Harpoon',
+      },
+      {
+        '<leader>np',
+        function()
+          harpoon:list():prev()
+        end,
+        desc = 'Previous file in Harpoon list',
+      },
+      {
+        '<leader>nn',
+        function()
+          harpoon:list():next()
+        end,
+        desc = 'Next file in Harpoon list',
+      },
+    }
   end,
 }
