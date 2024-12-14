@@ -31,19 +31,19 @@ count=1
 
 # If there are two monitors, assign 5 workspaces to each, else 10 to the single monitor
 if [ "$monitor_count" -eq 2 ]; then
-	for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
-		xrandr --output "$monitor" --right-of eDP-1
-		bspc monitor "$monitor" -d '1' '2' '3' '4' '5'
-	done
+  for monitor in $(xrandr -q | grep -w 'connected' | cut -d' ' -f1); do
+    xrandr --output "$monitor" --right-of eDP-1
+    bspc monitor "$monitor" -d '1' '2' '3' '4' '5'
+  done
 elif [ "$monitor_count" -eq 1 ]; then
-	# Assign 10 workspaces to the single monitor
-	# Loop through all outputs listed by xrandr
-	for output in $(xrandr | grep 'disconnected' | cut -d' ' -f1); do
-		xrandr --output "$output" --off
-	done
-	RelocateDesktop &
-	single_monitor=$(xrandr -q | grep -w 'connected' | cut -d' ' -f1)
-	bspc monitor "$single_monitor" -d '1' '2' '3' '4' '5' '6' '7' '8' '9' '10'
+  # Assign 10 workspaces to the single monitor
+  # Loop through all outputs listed by xrandr
+  for output in $(xrandr | grep 'disconnected' | cut -d' ' -f1); do
+    xrandr --output "$output" --off
+  done
+  RelocateDesktop &
+  single_monitor=$(xrandr -q | grep -w 'connected' | cut -d' ' -f1)
+  bspc monitor "$single_monitor" -d '1' '2' '3' '4' '5' '6' '7' '8' '9' '10'
 fi
 
 # Default 1 monitor with 6 workspaces
@@ -66,7 +66,7 @@ bspc config single_monocle true
 bspc config borderless_monocle false
 bspc config gapless_monocle false
 
-bspc config focus_follows_pointer true
+bspc config focus_follows_pointer false
 bspc config pointer_follows_focus false
 bspc config pointer_motion_interval 5
 bspc config pointer_modifier mod4
@@ -108,3 +108,6 @@ pidof -q polkit-gnome-authentication-agent-1 || { /usr/lib/polkit-gnome/polkit-g
 
 # Launch nm-applet
 pidof -q nm-applet || nm-applet &
+
+# Hibernate script
+flock -xn /tmp/Hibernate.lock -c "${HOME}/.config/bspwm/src/Hibernate" &

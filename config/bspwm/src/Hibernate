@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Function to get battery percentage
+get_battery_percentage() {
+    upower -i $(upower -e | grep BAT) | grep -E "percentage" | awk '{print $2}' | tr -d '%'
+}
+
+# Function to check charging status
+is_charging() {
+    upower -i $(upower -e | grep BAT) | grep -E "state" | awk '{print $2}'
+}
+
+# Variables to track state
+low_battery_count=0
+
+# Infinite loop to monitor battery
+while true; do
+    # Get current battery percentage and charging status
+    battery_percentage=$(get_battery_percentage)
+    charging_status=$(is_charging)
+
+    # Beep if battery is 20% or below and discharging
+    if [[ "$charging_status" != "charging" && "$battery_percentage" -le 20 ]]; then
+        notify-send -u normal "Battery Warning" "$battery_percentage% and discharging" --icon=battery
+    fi
+
+    # Check if system is not charging and battery is below 10%
+    if [[ "$charging_status" != "charging" && "$battery_percentage" -lt 10 ]]; then
+        ((low_battery_count++))
+        notify-send -u critical "Hibernating" "Hibernating in 1 minute." --icon=battery
+
+        # Hibernate on the second consecutive low battery check
+        if [[ "$low_battery_count" -ge 2 ]]; then
+            echo "Hibernating due to low battery."
+            systemctl hibernate
+        fi
+    else
+        # Reset counter if charging or battery level is sufficient
+        low_battery_count=0
+    fi
+
+    # Wait for 1 minute before checking again
+    sleep 60
+done
+
