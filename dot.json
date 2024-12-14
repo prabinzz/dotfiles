@@ -51,5 +51,14 @@
 		"path" : "~/.config/zsh",
 		"target" : "config"
 	}
+  ,{
+    "path" : "~/.zshrc", 
+    "target": "home"
+  }
+  ,{
+    "path" : "~/.zshenv", 
+    "target": "home"
+  }
+
 
 ]

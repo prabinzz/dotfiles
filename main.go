@@ -170,6 +170,13 @@ func main() {
 				return
 			}
 		}
+    if loc.Target == "home" {
+			dest, err = PathCheck("./home/")
+			if err != nil {
+				fmt.Println("Error with home path:", err)
+				return
+			}
+		}
 
 		// Handle regular target path
 		target, err = PathCheck(loc.Path)
@@ -188,3 +195,4 @@ func main() {
 	// All operations were successful
 	fmt.Println("All locations processed successfully!")
 }
+
