@@ -42,9 +42,13 @@ result() {
 }
 
 case "$class" in
-VirtualBoxVM)
-  result "state=floating center=on"
-  ;;
+# VirtualBoxVM)
+#   result "state=floating center=on"
+#   ;;
+# VirtualBox)
+#   result "state=floating center=on"
+#   ;;
+
 FloaTerm)
   dimensions=$(calculate_dimensions 51 52)
   result "state=floating center=on rectangle=$dimensions"
@@ -97,7 +101,7 @@ full)
 esac
 
 case "$instance" in
-Live Caption)
+LiveCaption)
   result "state=floating sticky=on rectangle=500x290+1054+593"
   ;;
 Toolkit)
