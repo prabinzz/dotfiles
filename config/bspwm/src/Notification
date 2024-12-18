@@ -1,0 +1,17 @@
+#!/bin/env bash
+
+DUNST_BODY=$2
+
+# List of keywords to check
+KEYWORDS=("Volume" "Brightness")
+
+# Check if DUNST_BODY matches any keyword followed by any character
+for keyword in "${KEYWORDS[@]}"; do
+  if [[ "$DUNST_BODY" =~ ${keyword}.+ ]]; then
+    sleep 0.5
+    exit 0
+  fi
+done
+
+# Play notification sound if no matches found
+paplay ~/.config/bspwm/src/assets/notification.wav
