@@ -31,6 +31,8 @@ super + d
 shift + alt + {b,g,n}
 	OpenApps {--browser,--editor,--filemanager}
 
+super + alt + e 
+  rofi -show emoji -config ~/.config/bspwm/src/rofi-themes/Emoji.rasi
 # Terminal apps (ranger, nvim, ncmpcpp)
 shift + alt + {y,v,k}
 	OpenApps {--yazi,--nvim,--music}

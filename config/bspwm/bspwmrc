@@ -111,3 +111,6 @@ pidof -q nm-applet || nm-applet &
 
 # Hibernate script
 flock -xn /tmp/Hibernate.lock -c "${HOME}/.config/bspwm/src/Hibernate" &
+
+# bluetooth controls
+pidof -q mpris-proxy || { mpris-proxy & }

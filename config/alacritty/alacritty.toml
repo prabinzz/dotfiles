@@ -7,7 +7,10 @@
 #	gh0stzk - https://github.com/gh0stzk/dotfiles
 
 [general]
-import = ["~/.config/alacritty/rice-colors.toml", "~/.config/alacritty/fonts.toml"]
+import = [
+  "~/.config/alacritty/rice-colors.toml",
+  "~/.config/alacritty/fonts.toml",
+]
 live_config_reload = true
 
 [cursor]
@@ -29,8 +32,8 @@ opacity = 1.0
 dynamic_padding = true
 
 [window.padding]
-x = 15
-y = 15
+x = 5
+y = 5
 
 [scrolling]
 history = 10000
@@ -39,4 +42,6 @@ multiplier = 3
 [bell]
 animation = "Linear"
 duration = 0
-command = { program = "paplay", args = ["/usr/share/sounds/freedesktop/stereo/dialog-error.oga"] }
+command = { program = "paplay", args = [
+  "/usr/share/sounds/freedesktop/stereo/dialog-error.oga",
+] }

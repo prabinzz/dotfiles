@@ -93,20 +93,37 @@ function dir_icon {
   fi
 }
 
-PS1='%B%F{blue}%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_info_msg_0_} %(?.%B%F{green}.%F{red})%f%b '
-
-# command not found
-command_not_found_handler() {
-	printf "%s%s? I don't know what is it\n" "$acc" "$0" >&2
-    return 127
+# Function to get the current Vim mode
+function vim_mode_indicator {
+  # Default to Insert mode if KEYMAP is unset
+  local mode=${KEYMAP:-viins}
+  case $mode in
+    vicmd)  echo "%B%F{yellow}N%f%b" ;;  # Normal mode
+    main|viins) echo "%B%F{green}I%f%b" ;; # Insert mode
+    visual) echo "%B%F{magenta}V%f%b" ;;  # Visual mode
+    *) echo "%B%F{red}?%f%b" ;;           # Unknown mode
+  esac
 }
 
+PS1='%B%F{blue}%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b $(vim_mode_indicator) ${vcs_info_msg_0_} %(?.%B%F{green}.%F{red})%f%b '
+
+# Command not found
+command_not_found_handler() {
+  printf "%s%s? I don't know what is it" "$acc" "$0" >&2
+  return 127
+}
+# Command not found
+command_not_found_handler() {
+  printf "%s%s? I don't know what is it" "$acc" "$0" >&2
+  return 127
+}
 #  ┌─┐┬  ┬ ┬┌─┐┬┌┐┌┌─┐
 #  ├─┘│  │ ││ ┬││││└─┐
 #  ┴  ┴─┘└─┘└─┘┴┘└┘└─┘
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -154,7 +171,9 @@ export NVM_DIR="$HOME/.nvm"
 
 ### custom 
 
-##Fzf 
+## fzf 
 
 eval "$(fzf --zsh)"
 
+## zoxide
+eval "$(zoxide init zsh)"

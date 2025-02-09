@@ -25,7 +25,6 @@ selected_partition=$(echo "$partitions" | rofi -dmenu -i -p "Select partition to
 
 # If the user cancels, exit
 if [ -z "$selected_partition" ]; then
-  send_notification "Action Cancelled" "No partition selected."
   echo "No partition selected."
   exit 1
 fi
