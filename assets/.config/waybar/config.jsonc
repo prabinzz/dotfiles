@@ -6,7 +6,7 @@
 
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "pulseaudio", "battery", "custom/notification"],
+  "modules-right": ["network", "pulseaudio", "battery", "custom/notification", "tray"],
 
 
 
@@ -40,6 +40,14 @@
       "on-click-backward": "tz_down",
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down"
+    }
+  },  
+  "tray": {
+    "icon-size": 15,
+    "spacing": 9,
+    "icons": {
+      "blueman": "bluetooth",
+      "TelegramDesktop": "$HOME/.local/share/icons/hicolor/15x16/apps/telegram.png",
     }
   },
     "battery": {
