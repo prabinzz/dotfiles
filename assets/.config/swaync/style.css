@@ -1,0 +1,26 @@
+/* Styling the main notification container */
+#notification-bar {
+    background-color: rgba(30, 30, 30, 0.9);
+    border: 2px solid #5a5a5a;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Styling the notification items */
+.notification {
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.notification-body {
+    font-size: 14px;
+}
+
+/* Styling the Notification Center */
+#notification-center {
+    background-color: rgba(10, 10, 10, 0.95);
+    border: 1px solid #7c357c;
+    border-radius: 12px;
+}

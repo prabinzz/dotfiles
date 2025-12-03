@@ -1,0 +1,21 @@
+{
+  // Position and display settings
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay", // ensures it's above other windows
+  "cssFile": "~/.config/swaync/style.css",
+
+  // Notification behavior
+  "timeout": 5, // Notification timeout in seconds
+  "maxNotifications": 5,
+  "keyboardShortcuts": true,
+
+  // Control the Notification Center (the history list)
+  "notificationCenter": {
+    "width": 400,
+    "maxHeight": 600,
+    "padding": 10,
+    // Add a keybind to toggle the center
+    // "keyboardShortcut": "Mod4+N" // Assuming $MOD (Super/Win key) + N
+  }
+}
