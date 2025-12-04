@@ -95,4 +95,10 @@ log "Enabling SDDM..."
 sudo systemctl enable sddm
 success "SDDM enabled."
 
+read -p "Install nvidia driver? (y/n): " -n 0 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  ./scripts/nvidiainstall.sh
+fi
+
 log "Installation complete! Please reboot your system."
