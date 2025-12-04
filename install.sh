@@ -61,6 +61,7 @@ PACKAGES=(
   wl-clipboard
   pavucontrol
   zed
+  dnsmasq
 )
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
 
