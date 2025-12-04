@@ -1,4 +1,6 @@
-#!/bin/zsh
+#!/bin/bash
+
+echo "Starting fnm (Fast Node Manager) installation..."
 
 # --- 1. System Update and Toolchain Installation (Pacman) ---
 echo "Updating system packages and installing rustup..."
@@ -52,7 +54,7 @@ fnm default --lts
 
 # --- 5. Final Verification ---
 echo "---"
-echo "✅ Installation and configuration complete."
+echo "Installation and configuration complete."
 echo "Current Node Version:"
 node -v
 echo "Current npm Version:"

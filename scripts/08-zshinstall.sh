@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Installing Zsh and Oh My Zsh..."
+
 # --- 1. Install Zsh and Dependencies (Git, Curl) using pacman ---
 
 echo "Installing Zsh, Git, and Curl via pacman..."
@@ -49,5 +51,5 @@ else
 fi
 
 echo "---"
-echo "✅ Zsh and Oh My Zsh setup complete on Arch Linux!"
+echo "Zsh and Oh My Zsh setup complete on Arch Linux!"
 echo "Please **log out and log back in** (or simply type 'zsh') for the changes to take effect and to start using Zsh."

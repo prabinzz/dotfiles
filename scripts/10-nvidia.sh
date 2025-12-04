@@ -1,14 +1,14 @@
 #!/bin/bash
 
+echo "NVIDIA Proprietary Driver Installer for Hyprland"
+echo "================================================ட்டான"
+echo ""
+
 # Check if running as root
 if [ "$EUID" -eq 0 ]; then
   echo "Do not run as root. Script will ask for sudo when needed."
   exit 1
 fi
-
-echo "NVIDIA Proprietary Driver Installer for Hyprland"
-echo "================================================"
-echo ""
 
 # Detect NVIDIA GPU
 if ! lspci | grep -i nvidia >/dev/null; then
@@ -162,25 +162,4 @@ else
 fi
 
 # Final message
-echo "================================================"
-echo "Installation Complete!"
-echo "================================================"
-echo ""
-echo "IMPORTANT: You must reboot for changes to take effect"
-echo ""
-echo "After reboot, add these to your hyprland.conf:"
-echo ""
-echo "env = LIBVA_DRIVER_NAME,nvidia"
-echo "env = XDG_SESSION_TYPE,wayland"
-echo "env = GBM_BACKEND,nvidia-drm"
-echo "env = __GLX_VENDOR_LIBRARY_NAME,nvidia"
-echo "env = WLR_NO_HARDWARE_CURSORS,1"
-echo "env = XCURSOR_SIZE,24"
-echo ""
-echo "cursor {"
-echo "    no_hardware_cursors = true"
-echo "}"
-echo ""
-echo "Verify installation: nvidia-smi"
-echo "Check module: lsmod | grep nvidia"
-echo ""
+echo "================================================

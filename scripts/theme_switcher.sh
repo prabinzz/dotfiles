@@ -24,7 +24,7 @@ fi
 # Load theme variables
 source "$THEME_FILE"
 
-echo "Applying theme: $THEME"
+echo "Applying theme: $THEME..."
 
 # 1. Update Hyprland Colors
 cat >"$HOME/.config/hypr/colors.conf" <<EOF
@@ -64,3 +64,5 @@ disown
 
 # Send notification
 notify-send "Theme Changed" "Applied theme: $THEME"
+
+echo "Theme '$THEME' applied successfully."

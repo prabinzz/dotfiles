@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# gemini-tui (Wayland friendly)
+# Requirements: bash, curl, jq, fzf, wl-copy
+# Uses environment variable: GEMINI_API_KEY
+
+if [[ -z "$GEMINI_API_KEY" ]]; then
+  echo "ERROR: GEMINI_API_KEY not set. Export it before running."
+  exit 1
+fi
+
+MODEL="models/gemini-2.5-flash"
+API_URL="https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
+
+prompt_cmd() {
+  read -rp "Your request: " QUERY
+  [[ -z "$QUERY" ]] && echo "Empty query" && return
+
+  RESPONSE=$(curl -s \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $GEMINI_API_KEY" \
+    -d "{\"model\": \"$MODEL\", \"messages\": [{\"role\": \"user\", \"content\": \"$QUERY\"}]}" \
+    "$API_URL")
+
+  # If failure, warn user to not use mock
+  if ! echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
+    echo "API ERROR: Do not use mock responses."
+    return
+  fi
+
+  CMD=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+
+  if [[ -z "$CMD" ]]; then
+    echo "No command returned."
+    return
+  fi
+
+  echo "\n=== Suggested Command ==="
+  echo "$CMD" | sed 's/^/  /'
+
+  echo "$CMD" | wl-copy
+  echo "\nCopied to clipboard (wl-copy)."
+}
+
+# Allow query via argument
+if [[ -n "$1" ]]; then
+  QUERY="$*"
+  RESPONSE=$(curl -s \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $GEMINI_API_KEY" \
+    -d "{\"model\": \"$MODEL\", \"messages\": [{\"role\": \"user\", \"content\": \"$QUERY\"}]}" \
+    "$API_URL")
+
+  if ! echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
+    echo "API ERROR: Do not use mock responses."
+    exit 1
+  fi
+
+  CMD=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty')
+  echo "$CMD" | wl-copy
+  echo "$CMD"
+  exit 0
+fi
+
+while true; do
+  prompt_cmd
+  echo
+done
+

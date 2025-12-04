@@ -2,109 +2,54 @@
 
 set -e
 
-BASE_DIR="$(dirname "$SCRIPT_PATH")"
+BASE_DIR="$(dirname "$0")"
+SCRIPTS_DIR="$BASE_DIR/scripts"
 
-# Colors
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-NC='\033[0m'
-
-log() {
-  echo -e "${BLUE}[INSTALLER]${NC} $1"
-}
-
-success() {
-  echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-error() {
-  echo -e "${RED}[ERROR]${NC} $1"
-}
-
-# Check for yay
-if ! command -v yay &>/dev/null; then
-  log "yay is not installed. Installing it."
-  ./scripts/yayinstall.sh "$BASE_DIR"
-  exit 1
-fi
-
-log "Starting installation..."
-
-# 1. Base Packages
-log "Installing base packages..."
-PACKAGES=(
-  hyprland
-  sddm
-  waybar
-  rofi
-  swww
-  xdg-desktop-portal-hyprland
-  kitty
-  nautilus
-  neovim
-  ttf-jetbrains-mono-nerd
-  noto-fonts-emoji
-  polkit-gnome
-  qt5-wayland
-  qt6-wayland
-  brightnessctl
-  pamixer
-  jq
-  swaync
-  libnotify
-  btop
-  zed
-  less
-  slurp
-  grim
-  wl-clipboard
-  pavucontrol
-  zed
-  dnsmasq
-  rustup
-)
-sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
-
-AURPACKAGES=(
-  google-chrome
-  linux-wifi-hotspot
-  nwg-look
-  nwg-displays
+# An array of scripts to be executed in order.
+# To add a new script, just add the file name to this list.
+# To disable a script, comment it out.
+INSTALL_SCRIPTS=(
+  "01-base-packages.sh"
+  "02-aur-packages.sh"
+  "03-hyprexpoinstall.sh"
+  "04-nbfc-linux.sh"
+  "05-flatpakconfig.sh"
+  "06-themes.sh"
+  "07-copyconfigs.sh"
+  "08-zshinstall.sh"
+  "09-sddm.sh"
+  "11-fnminstall.sh"
+  "12-gemini-cli.sh"
 )
 
-rustup default stable
-yay -S --noconfirm --needed "${AURPACKAGES[@]}"
-./scripts/hyprexpoinstall.sh
-./scripts/nbfc-linux.sh
+# Function to run a script.
+run_script() {
+  local script_path="$SCRIPTS_DIR/$1"
+  if [ -f "$script_path" ]; then
+    echo "--- Running $1 ---"
+    bash "$script_path" "$BASE_DIR"
+    echo "--- Finished $1 ---"
+    echo ""
+  else
+    echo "--- Warning: Script $1 not found. Skipping. ---"
+    echo ""
+  fi
+}
 
-success "Base packages installed."
+echo "Starting installation..."
+echo "======================"
+echo ""
 
-log ./scripts/flatpakconfig.sh
+for script_name in "${INSTALL_SCRIPTS[@]}"; do
+  run_script "$script_name"
+done
 
-success "Flatpak configured"
-
-log "Installing themes"
-./scripts/themes.sh "$BASE_DIR"
-success "Themes installed."
-
-log "Copying configs."
-./scripts/copyconfigs.sh "$BASE_DIR"
-log "Copying configs."
-
-./scripts/zshinstall.sh
-# Enable SDDM
-log "Enabling SDDM..."
-sudo systemctl enable sddm
-success "SDDM enabled."
-
-read -p "Install nvidia driver? (y/n): " -n 0 -r
+read -p "Install nvidia driver? (y/n): " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  ./scripts/nvidiainstall.sh
+  run_script "10-nvidia.sh"
 fi
 
-./scripts/fnminstall.sh
-npm install -g @google/gemini-cli
 
-log "Installation complete! Please reboot your system."
+echo "======================="
+echo "Installation complete! Please reboot your system."
