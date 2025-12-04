@@ -20,6 +20,7 @@ PACKAGES=(
   brightnessctl
   pamixer
   jq
+  fzf
   swaync
   libnotify
   btop
