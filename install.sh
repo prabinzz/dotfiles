@@ -62,6 +62,7 @@ PACKAGES=(
   pavucontrol
   zed
   dnsmasq
+  rustup
 )
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
 
@@ -72,6 +73,7 @@ AURPACKAGES=(
   nwg-displays
 )
 
+rustup default stable
 yay -S --noconfirm --needed "${AURPACKAGES[@]}"
 ./scripts/hyprexpoinstall.sh
 ./scripts/nbfc-linux.sh
@@ -90,6 +92,7 @@ log "Copying configs."
 ./scripts/copyconfigs.sh "$BASE_DIR"
 log "Copying configs."
 
+./scripts/zshinstall.sh
 # Enable SDDM
 log "Enabling SDDM..."
 sudo systemctl enable sddm
@@ -100,5 +103,8 @@ echo ""
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   ./scripts/nvidiainstall.sh
 fi
+
+./scripts/fnminstall.sh
+npm install -g @google/gemini-cli
 
 log "Installation complete! Please reboot your system."
