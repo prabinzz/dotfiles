@@ -73,6 +73,9 @@ AURPACKAGES=(
 )
 
 yay -S --noconfirm --needed "${AURPACKAGES[@]}"
+./scripts/hyprexpoinstall.sh
+./scripts/nbfc-linux.sh
+
 success "Base packages installed."
 
 log ./scripts/flatpakconfig.sh
