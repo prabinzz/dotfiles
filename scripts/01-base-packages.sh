@@ -4,6 +4,7 @@ echo "Installing base packages..."
 
 PACKAGES=(
   hyprland
+  hypridle
   sddm
   waybar
   rofi
@@ -33,6 +34,7 @@ PACKAGES=(
   zed
   dnsmasq
   rustup
+  blueman
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
