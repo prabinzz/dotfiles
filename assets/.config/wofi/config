@@ -1,0 +1,12 @@
+# General Options
+show=drun
+allow_images=true
+allow_markup=fasle
+# Style and geometry
+term=alacritty
+width=30%
+height=40%
+location=center
+key_expand=Tab
+# Choose your CSS file
+style=$HOME/.config/wofi/style.css
