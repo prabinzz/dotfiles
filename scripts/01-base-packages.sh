@@ -35,6 +35,8 @@ PACKAGES=(
   dnsmasq
   rustup
   blueman
+  imagemagick
+  swappy
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
