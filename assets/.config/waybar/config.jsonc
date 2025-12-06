@@ -12,13 +12,13 @@
 
   "hyprland/workspaces": {
     "disable-scroll": true,
-    "all-outputs": true,
+    "all-outputs": false,
     "format": "{name}"
   },
 
   "clock": {
     "format": "{:%H:%M}  ",
-    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+    "format-alt": "{:%A, %B %d, %Y (%R)} ",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode"          : "month",
@@ -50,17 +50,20 @@
       "TelegramDesktop": "$HOME/.local/share/icons/hicolor/15x16/apps/telegram.png",
     }
   },
-    "battery": {
+  "battery": {
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 15
+      "critical": 20
     },
-    "format": "{capacity} {icon}",
-    "format-charging": "{capacity} 󰂄", 
-    "format-plugged": "{capacity} 󱐥",  
-    "tooltip-format": "Test",
-    "format-icons": ["", "", "", "", ""],
+    "format": "{icon} {capacity}%",
+    "rotate": 0,
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-time": "{H}h {M}m",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "interval": 15
   },
 
   "network": {
