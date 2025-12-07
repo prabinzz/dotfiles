@@ -43,7 +43,7 @@ dual_mode() {
   fi
 
   # Let user select which monitor to use
-  SELECTED=$(echo "$MONITORS" | wofi --dmenu --prompt "Select External Monitor" --width 500 --height 200)
+  SELECTED=$(echo "$MONITORS" | rofi -dmenu -p "Select External Monitor" -theme-str 'window {width: 500px; height: 400px;}')
 
   if [ -z "$SELECTED" ]; then
     exit 0
@@ -76,7 +76,7 @@ mirror_mode() {
   fi
 
   # Let user select which monitor to mirror to
-  SELECTED=$(echo "$MONITORS" | wofi --dmenu --prompt "Select Monitor to Mirror" --width 500 --height 200)
+  SELECTED=$(echo "$MONITORS" | rofi -dmenu -p "Select Monitor to Mirror" -theme-str 'window {width: 500px; height: 400px;}')
 
   if [ -z "$SELECTED" ]; then
     exit 0
@@ -91,7 +91,8 @@ mirror_mode() {
 }
 
 # Show wofi menu for mode selection
-CHOICE=$(echo -e "󰍹  Laptop Only\n󰍺  Dual Monitor\n󰹑  Mirror Display" | wofi --dmenu --prompt "Select Monitor Mode" --width 300 --height 200)
+CHOICE=$(echo -e "󰍹  Laptop Only\n󰍺  Dual Monitor\n󰹑  Mirror Display" |
+  rofi -dmenu -p "Select Monitor Mode" -theme-str 'window {width: 400px; height: 400px;}')
 
 case "$CHOICE" in
 "󰍹  Laptop Only")

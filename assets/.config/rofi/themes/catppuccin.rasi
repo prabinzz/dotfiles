@@ -1,0 +1,8 @@
+* {
+    background:      #24273AFF; /* Catppuccin Macchiato Base */
+    background-alt:  #292C42FF; /* Catppuccin Macchiato Mantle or Surface0 */
+    foreground:      #CAD3F5FF; /* Catppuccin Macchiato Text */
+    selected:        #C6A0F6FF; /* Catppuccin Macchiato Mauve (Purple Accent) */
+    active:          #B8C0E0FF; /* Catppuccin Macchiato Lavender (or another accent for a secondary state) */
+    urgent:          #ED8796FF; /* Catppuccin Macchiato Red (or Maraschino/Rosewater) */
+}
