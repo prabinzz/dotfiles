@@ -5,7 +5,7 @@ SAVE_DIR=~/Pictures/Screenshots
 mkdir -p "$SAVE_DIR"
 
 # Editor for screenshots. Requires swappy.
-EDITOR="swappy -f"
+EDITOR="satty -f"
 
 # Mode can be:
 # crop_and_copy
@@ -70,4 +70,3 @@ main() {
 }
 
 main
-

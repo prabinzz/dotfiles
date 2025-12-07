@@ -36,7 +36,7 @@ PACKAGES=(
   rustup
   blueman
   imagemagick
-  swappy
+  satty
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
