@@ -20,25 +20,24 @@ install_packages_and_sync=false
 # Simple argument parsing
 for arg in "$@"; do
   case "$arg" in
-    -h|--help)
-      show_help
-      exit 0
-      ;;
-    -a|--ask)
-      ask_before_exec=true
-      shift
-      ;;
-    -c|--sync-configs)
-      sync_only=true
-      shift
-      ;;
-    -p|--install-packages)
-      install_packages_and_sync=true
-      shift
-      ;;
+  -h | --help)
+    show_help
+    exit 0
+    ;;
+  -a | --ask)
+    ask_before_exec=true
+    shift
+    ;;
+  -c | --sync-configs)
+    sync_only=true
+    shift
+    ;;
+  -p | --install-packages)
+    install_packages_and_sync=true
+    shift
+    ;;
   esac
 done
-
 
 BASE_DIR="$(dirname "$0")"
 SCRIPTS_DIR="$BASE_DIR/scripts"
@@ -103,7 +102,15 @@ else
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     run_script "10-nvidia.sh"
   fi
+
+  read -p "Install Game packages? (y/n): " -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    run_script "13-gaming.sh"
+  fi
+
 fi
 
 echo "======================="
 echo "Installation complete!"
+
