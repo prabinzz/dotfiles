@@ -3,17 +3,22 @@
   "position": "top",
   "height": 30,
 
-
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "pulseaudio", "battery", "custom/notification", "tray"],
-
-
+  "modules-right": [
+    "custom/todo",
+    "idle_inhibitor",
+    "network",
+    "pulseaudio",
+    "battery",
+    "custom/notification",
+    "tray",
+  ],
 
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": false,
-    "format": "{name}"
+    "format": "{name}",
   },
 
   "clock": {
@@ -21,40 +26,48 @@
     "format-alt": "{:%A, %B %d, %Y (%R)} ",
     "tooltip-format": "{calendar}",
     "calendar": {
-      "mode"          : "month",
-      "mode-mon-col"  : 3,
-      "weeks-pos"     : "right",
-      "on-scroll"     : 1,
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
       "on-click-right": "mode",
       "format": {
-        "months":     "<span color='#ffead3'><b>{}</b></span>",
-        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
     },
     "actions": {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
       "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    }
-  },  
+      "on-scroll-down": "shift_down",
+    },
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": "",
+    },
+    "timeout": 30.5,
+  },
   "tray": {
     "icon-size": 15,
     "spacing": 9,
     "icons": {
       "blueman": "bluetooth",
       "TelegramDesktop": "$HOME/.local/share/icons/hicolor/15x16/apps/telegram.png",
-    }
+    },
   },
   "battery": {
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 20
+      "critical": 20,
     },
     "format": "{icon} {capacity}%",
     "rotate": 0,
@@ -63,41 +76,49 @@
     "format-alt": "{time} {icon}",
     "format-time": "{H}h {M}m",
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "interval": 15
+    "interval": 15,
   },
 
   "network": {
-    "format-wifi": "", 
-    "format-ethernet": "󰈀", 
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
     "tooltip-format": "{ifname} via {ipaddr} ",
     "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "", 
+    "format-disconnected": "",
   },
 
   "pulseaudio": {
     "format": "{volume} {icon}",
     "format-bluetooth": "{volume} {icon} ",
     "format-bluetooth-muted": "󰖁 ",
-    "format-muted": "󰖁 ", 
+    "format-muted": "󰖁 ",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": ["", "", ""],
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
   },
 
   "custom/notification": {
-    "exec": "swaync-client -swb", 
+    "exec": "swaync-client -swb",
     "return-type": "json",
     "format": " {icon} ",
     "format-icons": {
       "notification": "󰂞",
       "none": "󰂚",
       "dnd-none": "󰂛",
-      "dnd-notification": "󰂛"
+      "dnd-notification": "󰂛",
     },
     "tooltip": true,
-    "on-click": "sleep 0.1 && swaync-client -t -sw", 
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  }
+    "escape": true,
+  },
+  "custom/todo": {
+    "format": "{}",
+    "exec": "python3 ~/.local/bin/todohelper.py",
+    "interval": 20,
+    "return-type": "json",
+    "tooltip": true,
+    "on-click": "zeditor ~/.todo",
+  },
 }

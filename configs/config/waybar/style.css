@@ -46,7 +46,8 @@ window#waybar {
 #mode,
 #idle_inhibitor,
 #scratchpad,
-#mpd {
+#mpd
+#custom-todo{
     padding: 0 10px;
     color: @foreground;
     background-color: @secondary;
@@ -57,6 +58,16 @@ window#waybar {
 #clock {
     background-color: @primary;
     color: @background;
+}
+
+#idle_inhibitor.activated{
+  color: @background;
+  background-color: @success;
+}
+
+#idle_inhibitor.deactivated{
+  color: @foreground;
+  background-color: @secondary;
 }
 
 #battery.charging, #battery.plugged {
@@ -83,4 +94,25 @@ label:focus {
         background-color: #ffffff;
         color: #000000;
     }
+}
+
+#custom-todo {
+    padding: 0 10px;
+    color: @foreground;
+    background-color: @secondary;
+    margin: 5px 2px;
+    border-radius: 5px;
+}
+
+#custom-todo.active {
+    color: @primary;
+    font-weight: bold;
+}
+
+#custom-todo.done {
+    color: #a6e3a1;
+}
+
+#custom-todo .tooltip{
+  font-size: 16px;
 }
