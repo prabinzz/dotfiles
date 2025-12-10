@@ -48,7 +48,6 @@ SCRIPTS_DIR="$BASE_DIR/scripts"
 INSTALL_SCRIPTS=(
   "01-base-packages.sh"
   "02-aur-packages.sh"
-  "03-hyprexpoinstall.sh"
   "04-nbfc-linux.sh"
   "05-flatpakconfig.sh"
   "06-themes.sh"
@@ -57,6 +56,7 @@ INSTALL_SCRIPTS=(
   "09-sddm.sh"
   "11-fnminstall.sh"
   "12-gemini-cli.sh"
+  "14-sddmtheme.sh"
 )
 
 # Function to run a script.
@@ -113,4 +113,3 @@ fi
 
 echo "======================="
 echo "Installation complete!"
-
