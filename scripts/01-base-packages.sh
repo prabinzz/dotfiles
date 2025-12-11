@@ -37,6 +37,7 @@ PACKAGES=(
   blueman
   imagemagick
   satty
+  github-cli
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
