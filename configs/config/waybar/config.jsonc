@@ -80,10 +80,9 @@
   },
 
   "network": {
-    "format-wifi": "",
+    "format-wifi": "󱚽",
     "format-ethernet": "󰈀",
     "tooltip-format": "{ifname} via {ipaddr} ",
-    "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "",
   },
 
