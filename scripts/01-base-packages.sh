@@ -31,7 +31,6 @@ PACKAGES=(
   grim
   wl-clipboard
   pavucontrol
-  zed
   dnsmasq
   rustup
   blueman
