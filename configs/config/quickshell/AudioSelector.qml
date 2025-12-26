@@ -8,14 +8,14 @@ import Quickshell.Wayland
 QtObject {
     id: root
 
-    property color c_bg: "#EB1E1E2E"
+    property color c_bg: "#B31E1E2E"
     property color c_fg: "#CDD6F4"
     property color c_primary: "#CBA6F7"
-    property color c_secondary: "#585B70"
-    property color c_surface: "#99313244"
-    property color c_highlight: "#26CBA6F7"
+    property color c_secondary: "#45475A"
+    property color c_surface: "#6645475A"
+    property color c_highlight: "#44CBA6F7"
     property color c_alert: "#F38BA8"
-    property color c_border: "#14FFFFFF"
+    property color c_border: "#1AFFFFFF"
 
     property Process themeLoader: Process {
         command: ["cat", Quickshell.env("HOME") + "/.config/colors.json"]
@@ -24,12 +24,12 @@ QtObject {
                 if (this.text.trim() !== "") {
                     try {
                         var colors = JSON.parse(this.text);
-                        root.c_bg = colors.background.replace("#", "#EB");
+                        root.c_bg = "#B3" + colors.background.replace("#", "");
                         root.c_fg = colors.foreground;
                         root.c_primary = colors.primary;
                         root.c_secondary = colors.secondary;
-                        root.c_surface = colors.secondary + "99"; 
-                        root.c_highlight = colors.primary + "26";
+                        root.c_surface = "#66" + colors.secondary.replace("#", ""); 
+                        root.c_highlight = "#44" + colors.primary.replace("#", "");
                         root.c_alert = colors.alert;
                     } catch(e) {
                     }
@@ -157,7 +157,7 @@ QtObject {
             
             anchors.top: true
             anchors.right: true
-            margins.top: 34
+            margins.top: 30
             margins.right: 12
 
             WlrLayershell.layer: WlrLayershell.Overlay
