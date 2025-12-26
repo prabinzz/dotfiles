@@ -1,83 +1,99 @@
 @import "colors.css";
 
+/* Define semi-transparent versions of colors */
+@define-color bg_trans rgba(30, 30, 46, 0.7);
+@define-color secondary_trans rgba(69, 71, 90, 0.7);
+@define-color primary_trans rgba(203, 166, 247, 0.8);
+
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "JetBrainsMono Nerd Font", "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 13px;
-    min-height: 0;
+    font-weight: bold;
 }
 
 window#waybar {
-    background: @background;
+    background: transparent;
     color: @foreground;
-    transition-property: background-color;
-    transition-duration: .5s;
+}
+
+/* --- Modules Styling --- */
+#workspaces,
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#custom-todo,
+#tray,
+#idle_inhibitor,
+#custom-notification {
+    background-color: @bg_trans;
+    color: @foreground;
+    padding: 0px 10px;
+    margin: 2px 2px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Workspaces --- */
+#workspaces {
+    background: @bg_trans;
+    padding: 0 2px;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: @foreground;
-}
-
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inherit;
-    text-shadow: inherit;
+    padding: 0 4px;
+    color: @secondary;
+    background: transparent;
+    font-size: 14px;
 }
 
 #workspaces button.active {
-    background-color: @primary;
-    color: @background;
+    color: @primary;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#mpd
-#custom-todo{
-    padding: 0 10px;
+#workspaces button.urgent {
+    color: @alert;
+}
+
+#workspaces button:hover {
     color: @foreground;
-    background-color: @secondary;
-    margin: 5px 2px;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 
+/* --- Individual Module Colors --- */
 #clock {
-    background-color: @primary;
     color: @background;
+    background-color: @primary_trans;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
-#idle_inhibitor.activated{
-  color: @background;
-  background-color: @success;
+#pulseaudio {
+    color: @primary;
+    background-color: @secondary_trans;
 }
 
-#idle_inhibitor.deactivated{
-  color: @foreground;
-  background-color: @secondary;
+#network {
+    color: @success;
+    background-color: @secondary_trans;
+}
+
+#battery {
+    color: @foreground;
+    background-color: @secondary_trans;
 }
 
 #battery.charging, #battery.plugged {
-    color: @background;
-    background-color: @success;
+    color: @success;
 }
 
 #battery.critical:not(.charging) {
     background-color: @alert;
-    color: @foreground;
+    color: @background;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -85,8 +101,39 @@ window#waybar {
     animation-direction: alternate;
 }
 
-label:focus {
-    background-color: #000000;
+#custom-todo {
+    color: @foreground;
+    background-color: @secondary_trans;
+}
+
+#idle_inhibitor {
+    color: #fab387; 
+    background-color: @secondary_trans;
+}
+
+#custom-notification {
+    color: @primary;
+    background-color: @secondary_trans;
+}
+
+#tray {
+    background-color: @secondary_trans;
+}
+
+/* --- Interactions --- */
+#workspaces button:hover,
+#clock:hover,
+#battery:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-todo:hover,
+#idle_inhibitor:hover,
+#custom-notification:hover {
+    background-color: rgba(69, 71, 90, 0.9);
+}
+
+#clock:hover {
+    background-color: rgba(203, 166, 247, 1.0);
 }
 
 @keyframes blink {
@@ -94,25 +141,4 @@ label:focus {
         background-color: #ffffff;
         color: #000000;
     }
-}
-
-#custom-todo {
-    padding: 0 10px;
-    color: @foreground;
-    background-color: @secondary;
-    margin: 5px 2px;
-    border-radius: 5px;
-}
-
-#custom-todo.active {
-    color: @primary;
-    font-weight: bold;
-}
-
-#custom-todo.done {
-    color: #a6e3a1;
-}
-
-#custom-todo .tooltip{
-  font-size: 16px;
 }
