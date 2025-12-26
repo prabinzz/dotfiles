@@ -44,10 +44,15 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 4px;
-    color: @secondary;
+    padding: 0 8px;
+    color: #6c7086; /* Brighter subtext color for visibility */
     background: transparent;
     font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: @foreground;
 }
 
 #workspaces button.active {

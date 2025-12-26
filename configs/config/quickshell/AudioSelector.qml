@@ -8,24 +8,41 @@ import Quickshell.Wayland
 QtObject {
     id: root
 
-    // --- Configuration (Catppuccin Macchiato palette) ---
-    // Using hex #AARRGGBB for reliability
-    property color c_bg: "#EB1E1E2E"        // 0.92 opacity
+    property color c_bg: "#EB1E1E2E"
     property color c_fg: "#CDD6F4"
     property color c_primary: "#CBA6F7"
     property color c_secondary: "#585B70"
-    property color c_surface: "#99313244"   // 0.6 opacity
-    property color c_highlight: "#26CBA6F7" // 0.15 opacity
+    property color c_surface: "#99313244"
+    property color c_highlight: "#26CBA6F7"
     property color c_alert: "#F38BA8"
-    property color c_border: "#14FFFFFF"    // 0.08 opacity
+    property color c_border: "#14FFFFFF"
 
-    // --- SHARED DATA ---
+    property Process themeLoader: Process {
+        command: ["cat", Quickshell.env("HOME") + "/.config/colors.json"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                if (this.text.trim() !== "") {
+                    try {
+                        var colors = JSON.parse(this.text);
+                        root.c_bg = colors.background.replace("#", "#EB");
+                        root.c_fg = colors.foreground;
+                        root.c_primary = colors.primary;
+                        root.c_secondary = colors.secondary;
+                        root.c_surface = colors.secondary + "99"; 
+                        root.c_highlight = colors.primary + "26";
+                        root.c_alert = colors.alert;
+                    } catch(e) {
+                    }
+                }
+            }
+        }
+    }
+
     property ListModel sinksModel: ListModel { id: sharedSinks }
     property string currentDefaultSink: ""
     property bool dataReady: false
     property int focusedIndex: -1
 
-    // --- SHARED PROCESSES ---
     property Process pactlList: Process {
         command: ["pactl", "-f", "json", "list", "sinks"]
         stdout: StdioCollector {
@@ -50,8 +67,10 @@ QtObject {
         exitProc.running = true
     }
 
-    // --- LOGIC ---
     function reload() {
+        if (themeLoader.running) themeLoader.running = false
+        themeLoader.running = true
+
         if (pactlList.running) pactlList.running = false
         pactlList.running = true
         
@@ -129,7 +148,6 @@ QtObject {
         }
     }
 
-    // --- UI WINDOWS ---
     property var winGenerator: Instantiator {
         model: Quickshell.screens
         delegate: PanelWindow {
@@ -139,7 +157,7 @@ QtObject {
             
             anchors.top: true
             anchors.right: true
-            margins.top: 38
+            margins.top: 34
             margins.right: 12
 
             WlrLayershell.layer: WlrLayershell.Overlay
@@ -184,7 +202,6 @@ QtObject {
                     spacing: 4
                     padding: 12
                     
-                    // --- Modern Header ---
                     Item {
                         width: parent.width - 24
                         height: 30
@@ -199,7 +216,6 @@ QtObject {
                             anchors.left: parent.left
                         }
 
-                        // Close Button
                         Rectangle {
                             width: 26; height: 26
                             radius: 13
@@ -224,10 +240,8 @@ QtObject {
                         }
                     }
 
-                    // Spacer for header
                     Item { width: 1; height: 4 }
 
-                    // Separator
                     Rectangle {
                         width: parent.width - 24
                         height: 1
@@ -235,7 +249,6 @@ QtObject {
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
 
-                    // Spacer for list
                     Item { width: 1; height: 8 }
 
                     Repeater {
@@ -273,7 +286,6 @@ QtObject {
                                 anchors.margins: 10
                                 spacing: 12
 
-                                // Icon Container
                                 Rectangle {
                                     width: 36; height: 36
                                     radius: 18
@@ -304,7 +316,6 @@ QtObject {
                                         font.pixelSize: 13
                                     }
                                     
-                                    // Volume Track
                                     Rectangle {
                                         width: parent.width
                                         height: 4
@@ -317,7 +328,6 @@ QtObject {
                                             color: isDefault ? c_primary : c_fg
                                             radius: 2
                                             
-                                            // Handle glow
                                             Rectangle {
                                                 width: 8; height: 8
                                                 radius: 4

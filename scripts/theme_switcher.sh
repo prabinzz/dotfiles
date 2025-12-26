@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Theme Switcher Script
-# Usage: ./theme_switcher.sh [theme_name]
-# Example: ./theme_switcher.sh nord
-
 THEME=$1
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 THEMES_DIR="$SCRIPT_DIR/../themes"
@@ -21,18 +17,28 @@ if [ ! -f "$THEME_FILE" ]; then
   exit 1
 fi
 
-# Load theme variables
 source "$THEME_FILE"
 
 echo "Applying theme: $THEME..."
 
-# 1. Update Hyprland Colors
+# --- Update Configuration Files ---
+
+cat >"$HOME/.config/colors.json" <<EOF
+{
+  "background": "$WAYBAR_BACKGROUND",
+  "foreground": "$WAYBAR_FOREGROUND",
+  "primary": "$WAYBAR_PRIMARY",
+  "secondary": "$WAYBAR_SECONDARY",
+  "alert": "$WAYBAR_ALERT",
+  "success": "$WAYBAR_SUCCESS"
+}
+EOF
+
 cat >"$HOME/.config/hypr/colors.conf" <<EOF
 \$active_border_col = $HYPR_ACTIVE_BORDER
 \$inactive_border_col = $HYPR_INACTIVE_BORDER
 EOF
 
-# 2. Update Waybar Colors
 cat >"$HOME/.config/waybar/colors.css" <<EOF
 @define-color background $WAYBAR_BACKGROUND;
 @define-color foreground $WAYBAR_FOREGROUND;
@@ -42,9 +48,6 @@ cat >"$HOME/.config/waybar/colors.css" <<EOF
 @define-color success $WAYBAR_SUCCESS;
 EOF
 
-# 3. Update Kitty Theme
-# Assumes kitty themes are available or defined in the theme file.
-# For simplicity, we'll write the colors directly or use a kitty theme file if provided.
 cat >"$HOME/.config/kitty/current-theme.conf" <<EOF
 background $KITTY_BACKGROUND
 foreground $KITTY_FOREGROUND
@@ -53,16 +56,12 @@ selection_background $KITTY_SELECTION_BACKGROUND
 selection_foreground $KITTY_SELECTION_FOREGROUND
 EOF
 
-# 4. Reload Components
-# Reload Waybar
-pkill waybar
+# --- Reload Components ---
+
+pkill waybar || true
 waybar &
 disown
 
-# Reload Hyprland (not always needed for colors if using variables, but good practice)
-# hyprctl reload
-
-# Send notification
 notify-send "Theme Changed" "Applied theme: $THEME"
 
 echo "Theme '$THEME' applied successfully."
