@@ -11,6 +11,7 @@
     font-family: "JetBrainsMono Nerd Font", "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 13px;
     font-weight: bold;
+    min-height: 0;
 }
 
 window#waybar {
@@ -31,8 +32,8 @@ window#waybar {
     background-color: @bg_trans;
     color: @foreground;
     padding: 0px 10px;
-    margin: 2px 2px;
-    border-radius: 12px;
+    margin: 3px 2px;
+    border-radius: 10px;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -40,33 +41,34 @@ window#waybar {
 /* --- Workspaces --- */
 #workspaces {
     background: @bg_trans;
-    padding: 0 2px;
+    padding: 0px 2px;
 }
 
 #workspaces button {
-    padding: 0 8px;
-    color: #6c7086; /* Brighter subtext color for visibility */
+    padding: 0px 5px;
+    margin: 3px 1px;
+    color: #6c7086;
     background: transparent;
-    font-size: 14px;
+    font-size: 12px;
+    border-radius: 8px;
     transition: all 0.2s ease;
 }
 
-#workspaces button:hover {
-    color: @foreground;
-}
-
 #workspaces button.active {
-    color: @primary;
+    color: @background;
+    background-color: @primary;
+    padding: 0px 8px;
 }
 
 #workspaces button.urgent {
-    color: @alert;
+    color: @background;
+    background-color: @alert;
+    padding: 0px 8px;
 }
 
 #workspaces button:hover {
     color: @foreground;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
 }
 
 /* --- Individual Module Colors --- */
