@@ -37,6 +37,7 @@ PACKAGES=(
   imagemagick
   satty
   github-cli
+  starship
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
