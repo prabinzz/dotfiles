@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# Tmux Sessionizer Script
+#
+# This script allows you to quickly switch between existing tmux sessions or create
+# new ones based on project directories. It uses fzf for an interactive fuzzy search.
+#
+# Dependencies:
+# - tmux
+# - fzf
+#
+# Configuration:
+# Set the TMUX_SESSIONIZER_DIRS environment variable to a space-separated list of
+# directories you want to scan for projects.
+# Example: export TMUX_SESSIONIZER_DIRS="~/projects ~/work/clients"
+
+# Use user-defined dirs if set, otherwise provide sensible defaults.
+# Note: '~' is expanded here.
+TMUX_SESSIONIZER_DIRS=${TMUX_SESSIONIZER_DIRS:-"$HOME/projects $HOME/go"}
+
+# Get a list of existing tmux session names.
+# The '2>/dev/null' silences errors if the tmux server isn't running.
+existing_sessions=$(tmux ls -F '#S' 2>/dev/null)
+
+# Find all directories one level deep in the configured project directories.
+# We use a loop to handle multiple directories in TMUX_SESSIONIZER_DIRS.
+project_dirs=""
+for dir in $TMUX_SESSIONIZER_DIRS; do
+    # Ensure the directory exists before trying to find things in it.
+    if [[ -d "$dir" ]]; then
+        found_dirs=$(find "$dir" -mindepth 1 -maxdepth 1 -type d)
+        project_dirs=$(printf "%s\n%s" "$project_dirs" "$found_dirs")
+    fi
+done
+
+# Combine existing sessions and project directories into one list, removing any empty lines.
+# We use 'rev' twice to uniqely sort the list, keeping the first occurrence (sessions) in case of a name clash.
+combined_list=$(printf "%s\n%s" "$existing_sessions" "$project_dirs" | sed '/^$/d' | rev | uniq | rev)
+
+
+# Let the user select a session or project using fzf.
+# The --header provides context.
+selected_option=$(echo "$combined_list" | fzf --header="[TMUX] Select or Create Session")
+
+# If fzf was exited (e.g., via Esc) without a selection, exit the script.
+if [[ -z $selected_option ]]; then
+    exit 0
+fi
+
+# Get the basename of the selection. For a path like /home/user/project, this is 'project'.
+# For a session name like 'work', it's just 'work'.
+session_name=$(basename "$selected_option")
+# Replace dots with underscores in the session name, as tmux doesn't like them.
+session_name=${session_name//./_}
+
+# Check if a tmux session with this name already exists.
+if ! tmux has-session -t="$session_name" 2>/dev/null; then
+    # If the session doesn't exist, create a new detached one.
+    # The '-c' flag sets the starting directory for the new session.
+    tmux new-session -d -s "$session_name" -c "$selected_option"
+fi
+
+# Check if we are currently inside a tmux session.
+if [[ -n $TMUX ]]; then
+    # If inside tmux, switch to the target session.
+    tmux switch-client -t "$session_name"
+else
+    # If outside tmux, attach to the target session.
+    tmux attach-session -t "$session_name"
+fi
