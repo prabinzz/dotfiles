@@ -7,6 +7,8 @@ path+=(
     $HOME/bin
     $HOME/.local/bin
     $HOME/.cargo/bin
+    $HOME/.bun/bin
+    $HOME/.cache/.bun/bin
 )
 
 # 3. Export to ensure child processes see these changes

@@ -28,6 +28,7 @@ PACKAGES=(
   zed
   less
   slurp
+  wtype
   grim
   wl-clipboard
   pavucontrol
@@ -38,6 +39,7 @@ PACKAGES=(
   satty
   github-cli
   starship
+  unzip
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"

@@ -59,6 +59,7 @@ INSTALL_SCRIPTS=(
   "08-zshinstall.sh"
   "09-sddm.sh"
   "11-fnminstall.sh"
+  "11-buninstall.sh"
   "12-gemini-cli.sh"
   "14-sddmtheme.sh"
   "15-tmux.sh"

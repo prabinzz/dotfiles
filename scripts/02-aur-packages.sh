@@ -16,6 +16,9 @@ AURPACKAGES=(
   linux-wifi-hotspot
   nwg-look
   nwg-displays
+  bun-bin
+  rofi-greenclip
+  rofi-emoji
 )
 
 yay -S --noconfirm --needed "${AURPACKAGES[@]}"

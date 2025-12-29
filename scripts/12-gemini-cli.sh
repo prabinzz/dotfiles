@@ -1,5 +1,5 @@
 #!/bin/bash
 
 echo "Installing gemini-cli..."
-sudo npm install -g @google/gemini-cli
+bun install --global @google/gemini-cli
 echo "gemini-cli installed."
