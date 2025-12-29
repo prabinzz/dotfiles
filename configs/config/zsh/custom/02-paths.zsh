@@ -1,7 +1,7 @@
-# 1. Ensure duplicates are automatically removed (Cleanliness!)
+# Ensure duplicates are removed
 typeset -U path
 
-# 2. Add your paths to the array
+# Add user paths
 #    Zsh automatically syncs the 'path' array with the 'PATH' string
 path+=(
     $HOME/bin
@@ -11,5 +11,5 @@ path+=(
     $HOME/.cache/.bun/bin
 )
 
-# 3. Export to ensure child processes see these changes
+# Export PATH
 export PATH

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "NVIDIA Proprietary Driver Installer for Hyprland"
-echo "================================================ட்டான"
+echo "================================================"
 echo ""
 
 # Check if running as root
@@ -162,4 +162,4 @@ else
 fi
 
 # Final message
-echo "================================================
+echo "================================================"

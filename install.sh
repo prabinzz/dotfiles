@@ -25,23 +25,23 @@ for arg in "$@"; do
   -h | --help)
     show_help
     exit 0
-    ;;
+    ;; 
   -a | --ask)
     ask_before_exec=true
     shift
-    ;;
+    ;; 
   -c | --sync-configs)
     sync_only=true
     shift
-    ;;
+    ;; 
   -p | --install-packages)
     install_packages_and_sync=true
     shift
-    ;;
+    ;; 
   -s | --select)
     select_mode=true
     shift
-    ;;
+    ;; 
   esac
 done
 
@@ -50,18 +50,26 @@ SCRIPTS_DIR="$BASE_DIR/scripts"
 
 # Default ordered list for standard installation
 INSTALL_SCRIPTS=(
+  # --- Package Installation ---
   "01-base-packages.sh"
   "02-aur-packages.sh"
+
+  # --- System Configuration ---
   "04-nbfc-linux.sh"
   "05-flatpakconfig.sh"
-  "06-themes.sh"
+  "09-sddm.sh"      # Enables SDDM and sets theme
+  "10-nvidia.sh"    # Optional (will prompt if not interactive, but included here for completeness if selected)
+
+  # --- UI & Themes ---
+  "06-themes.sh"    # GTK/Icon themes
+  
+  # --- Dotfiles Sync ---
   "07-copyconfigs.sh"
+
+  # --- User Shell & Tools ---
   "08-zshinstall.sh"
-  "09-sddm.sh"
   "11-fnminstall.sh"
-  "11-buninstall.sh"
   "12-gemini-cli.sh"
-  "14-sddmtheme.sh"
   "15-tmux.sh"
 )
 
@@ -106,9 +114,6 @@ if [ "$select_mode" = true ]; then
   CHECKLIST_ARGS=()
   for script in "${ALL_SCRIPTS[@]}"; do
       # Default to OFF (unchecked) for all, user selects what they want.
-      # Or we could try to verify which ones are 'standard' to check them by default.
-      # For now, let's leave them OFF or verify against INSTALL_SCRIPTS to check them.
-      
       status="OFF"
       for default_script in "${INSTALL_SCRIPTS[@]}"; do
           if [[ "$script" == "$default_script" ]]; then
@@ -155,7 +160,19 @@ elif [ "$install_packages_and_sync" = true ]; then
   run_script "07-copyconfigs.sh"
 else
   # Default standard installation
+  
+  # Run the scripts defined in INSTALL_SCRIPTS
+  # Note: logic for optional scripts (nvidia, gaming) was handled specially before.
+  # We will restore that logic but only run scripts that are NOT those specific ones from the list,
+  # OR we can just keep the list clean and handle the optionals manually like before.
+  
+  # Let's filter out 10-nvidia.sh and 13-gaming.sh from the auto-run list if they are in there,
+  # because we want to ask for them.
+  
   for script_name in "${INSTALL_SCRIPTS[@]}"; do
+    if [[ "$script_name" == "10-nvidia.sh" || "$script_name" == "13-gaming.sh" ]]; then
+      continue
+    fi
     run_script "$script_name"
   done
 
@@ -173,5 +190,5 @@ else
 
 fi
 
-echo "======================="
+echo "======================"
 echo "Installation complete!"
