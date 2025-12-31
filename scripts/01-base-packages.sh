@@ -40,6 +40,7 @@ PACKAGES=(
   github-cli
   starship
   unzip
+  zoxide
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"

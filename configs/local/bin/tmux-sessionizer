@@ -17,9 +17,9 @@
 # Note: '~' is expanded here.
 TMUX_SESSIONIZER_DIRS=${TMUX_SESSIONIZER_DIRS:-"$HOME/projects $HOME/go"}
 
-# Get a list of existing tmux session names.
+# Get a list of existing tmux session names with 'S: ' prefix.
 # The '2>/dev/null' silences errors if the tmux server isn't running.
-existing_sessions=$(tmux ls -F '#S' 2>/dev/null)
+existing_sessions=$(tmux ls -F 'S: #S' 2>/dev/null)
 
 # Find all directories one level deep in the configured project directories.
 # We use a loop to handle multiple directories in TMUX_SESSIONIZER_DIRS.
@@ -31,6 +31,9 @@ for dir in $TMUX_SESSIONIZER_DIRS; do
         project_dirs=$(printf "%s\n%s" "$project_dirs" "$found_dirs")
     fi
 done
+
+# Add specific base directories requested by the user.
+project_dirs=$(printf "%s\n%s\n%s" "$project_dirs" "$HOME" "$HOME/dotfiles")
 
 # Combine existing sessions and project directories into one list, removing any empty lines.
 # We use 'rev' twice to uniqely sort the list, keeping the first occurrence (sessions) in case of a name clash.
@@ -46,9 +49,12 @@ if [[ -z $selected_option ]]; then
     exit 0
 fi
 
+# Remove 'S: ' prefix if present before calculating basename
+clean_selection="${selected_option#S: }"
+
 # Get the basename of the selection. For a path like /home/user/project, this is 'project'.
 # For a session name like 'work', it's just 'work'.
-session_name=$(basename "$selected_option")
+session_name=$(basename "$clean_selection")
 # Replace dots with underscores in the session name, as tmux doesn't like them.
 session_name=${session_name//./_}
 
@@ -56,7 +62,7 @@ session_name=${session_name//./_}
 if ! tmux has-session -t="$session_name" 2>/dev/null; then
     # If the session doesn't exist, create a new detached one.
     # The '-c' flag sets the starting directory for the new session.
-    tmux new-session -d -s "$session_name" -c "$selected_option"
+    tmux new-session -d -s "$session_name" -c "$clean_selection"
 fi
 
 # Check if we are currently inside a tmux session.
