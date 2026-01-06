@@ -77,6 +77,8 @@
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
     "tooltip-format": "{ifname} via {ipaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
     "on-click": "nm-connection-editor"
   },
 

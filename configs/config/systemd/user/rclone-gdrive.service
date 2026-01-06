@@ -1,0 +1,27 @@
+[Unit]
+Description=Rclone Google Drive Mount Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone mount gdrive: %h/drives/gdrive \
+    --vfs-cache-mode full \
+    --vfs-cache-max-size 10G \
+    --vfs-cache-max-age 24h \
+    --vfs-read-chunk-size 32M \
+    --vfs-read-chunk-size-limit 1G \
+    --dir-cache-time 1000h \
+    --attr-timeout 1000h \
+    --buffer-size 128M \
+    --vfs-read-ahead 128M \
+    --drive-chunk-size 64M \
+    --vfs-fast-fingerprint \
+    --async-read=true \
+    --allow-non-empty
+ExecStop=/bin/fusermount -u %h/drives/gdrive
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

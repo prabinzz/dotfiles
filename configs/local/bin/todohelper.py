@@ -11,7 +11,7 @@ from typing import Optional, List, Tuple
 TODO_FILE = Path.home() / ".todo"
 WEEKDAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 ICONS = {
-    "weekly": "\ud93d\udec3",   # calendar repeat
+    "weekly": "󰑖",   # calendar repeat (Nerd Font)
     "someday": "●",  # cloud
     "dated": "●",    # circle (default)
 }

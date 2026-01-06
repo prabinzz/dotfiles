@@ -41,6 +41,7 @@ PACKAGES=(
   starship
   unzip
   zoxide
+  rclone
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"
