@@ -9,6 +9,9 @@ alias vim='nvim'
 alias zshconfig="nvim ~/.config/zsh/.zshrc"
 alias reload="source ~/.config/zsh/.zshrc"
 alias tse="~/.local/bin/tmux-sessionizer"
+alias gemini="bun x gemini"
+alias ta="tmux a || tmux"
+
 # Git aliases
 alias gs='git status'
 alias ga='git add'
