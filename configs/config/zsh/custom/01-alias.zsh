@@ -18,3 +18,10 @@ alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
 alias gl='git log --oneline --graph --decorate'
+
+#nbfc fan
+alias fan90='nbfc set -s 90 -f 0 && nbfc set -s 90 -f 1'
+alias fan50='nbfc set -s 50 -f 0 && nbfc set -s 50 -f 1'
+alias fan20='nbfc set -s 20 -f 0 && nbfc set -s 20 -f 1'
+alias fanauto='nbfc set -a -f 0 && nbfc set -a -f 1'
+
