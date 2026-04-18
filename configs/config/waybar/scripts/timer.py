@@ -3,26 +3,49 @@ import sys
 import os
 import json
 import time
+import subprocess
 
 STATE_FILE = "/tmp/waybar_timer.json"
-DEFAULT_TIME = 25 * 60
+WORK_TIME = 45 * 60
+BREAK_TIME = 15 * 60
 
 def load_state():
     if os.path.exists(STATE_FILE):
         try:
             with open(STATE_FILE, "r") as f:
-                return json.load(f)
+                state = json.load(f)
+                # Ensure all keys exist for backward compatibility
+                if "phase" not in state:
+                    state["phase"] = "work"
+                if "elapsed" not in state:
+                    state["elapsed"] = 0
+                if "status" not in state:
+                    state["status"] = "stopped"
+                if "last_tick" not in state:
+                    state["last_tick"] = None
+                return state
         except:
             pass
-    return {"remaining": DEFAULT_TIME, "last_tick": None, "status": "stopped"}
+    return {"elapsed": 0, "last_tick": None, "status": "stopped", "phase": "work"}
 
 def save_state(state):
     with open(STATE_FILE, "w") as f:
         json.dump(state, f)
 
 def format_time(seconds):
-    mins, secs = divmod(int(seconds), 60)
+    seconds = max(0, int(seconds))
+    mins, secs = divmod(seconds, 60)
     return f"{mins:02d}:{secs:02d}"
+
+def notify(message):
+    try:
+        subprocess.run(["notify-send", "Timer", message, "-t", "5000"])
+        # Play a sound
+        sound_path = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"
+        if os.path.exists(sound_path):
+            subprocess.Popen(["paplay", sound_path])
+    except:
+        pass
 
 def update():
     state = load_state()
@@ -30,21 +53,41 @@ def update():
     
     if state["status"] == "running":
         if state["last_tick"]:
-            elapsed = now - state["last_tick"]
-            state["remaining"] -= elapsed
-            if state["remaining"] <= 0:
-                state["remaining"] = 0
-                state["status"] = "stopped"
+            passed = now - state["last_tick"]
+            state["elapsed"] += passed
         state["last_tick"] = now
+
+        # Phase transitions
+        if state["phase"] == "work" and state["elapsed"] >= WORK_TIME:
+            notify("Work cycle finished! Time for a break.")
+            state["phase"] = "break"
+            state["elapsed"] = 0
+        elif state["phase"] == "break" and state["elapsed"] >= BREAK_TIME:
+            notify("Break finished! Back to work.")
+            state["phase"] = "work"
+            state["elapsed"] = 0
+            
         save_state(state)
 
-    text = format_time(state["remaining"])
-    icon = "󱎫" if state["status"] == "running" else "󱎮" if state["status"] == "paused" else "󱎯"
+    total_time = WORK_TIME if state["phase"] == "work" else BREAK_TIME
+    remaining = total_time - state["elapsed"]
     
+    text = format_time(remaining)
+    icon = "󱎫" if state["phase"] == "work" else "󱎮"
+    if state["status"] == "paused":
+        icon = "󱎯"
+        
+    css_class = state["phase"]
+    warning_threshold = 300 if state["phase"] == "work" else 120
+    if remaining < warning_threshold:
+        css_class = "warning"
+    if state["status"] == "paused":
+        css_class = "paused"
+
     output = {
         "text": f"{icon} {text}",
-        "tooltip": f"Status: {state['status']}\nRemaining: {text}",
-        "class": state["status"]
+        "tooltip": f"Phase: {state['phase'].capitalize()}\nStatus: {state['status']}\nRemaining: {text}",
+        "class": css_class
     }
     print(json.dumps(output))
 
@@ -53,23 +96,31 @@ def toggle():
     if state["status"] == "running":
         state["status"] = "paused"
         state["last_tick"] = None
-    elif state["status"] == "paused":
-        state["status"] = "running"
-        state["last_tick"] = time.time()
-    else: # stopped
+    else: # paused or stopped
         state["status"] = "running"
         state["last_tick"] = time.time()
     save_state(state)
 
 def reset():
-    state = {"remaining": DEFAULT_TIME, "last_tick": None, "status": "stopped"}
+    state = {"elapsed": 0, "last_tick": None, "status": "stopped", "phase": "work"}
     save_state(state)
 
-def add(minutes):
+def add(seconds):
     state = load_state()
-    state["remaining"] += minutes * 60
-    if state["remaining"] < 0:
-        state["remaining"] = 0
+    state["elapsed"] -= seconds
+    
+    total_time = WORK_TIME if state["phase"] == "work" else BREAK_TIME
+    
+    if state["elapsed"] < 0:
+        state["elapsed"] = 0
+    elif state["elapsed"] >= total_time:
+        # If we subtracted so much time that we passed the limit
+        if state["phase"] == "work":
+            state["phase"] = "break"
+        else:
+            state["phase"] = "work"
+        state["elapsed"] = 0
+        
     save_state(state)
 
 if __name__ == "__main__":
