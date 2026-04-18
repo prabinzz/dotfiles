@@ -27,6 +27,7 @@ window#waybar {
 #network,
 #pulseaudio,
 #custom-todo,
+#custom-timer,
 #tray,
 #idle_inhibitor,
 #custom-notification {
@@ -115,6 +116,20 @@ window#waybar {
   background-color: @secondary_trans;
 }
 
+#custom-timer {
+  color: @foreground;
+  background-color: @secondary_trans;
+}
+
+#custom-timer.running {
+  color: @background;
+  background-color: @primary;
+}
+
+#custom-timer.paused {
+  color: @alert;
+}
+
 #idle_inhibitor {
   color: #fab387;
   background-color: @secondary_trans;
@@ -136,6 +151,7 @@ window#waybar {
 #network:hover,
 #pulseaudio:hover,
 #custom-todo:hover,
+#custom-timer:hover,
 #idle_inhibitor:hover,
 #custom-notification:hover {
   background-color: rgba(69, 71, 90, 0.9);

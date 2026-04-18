@@ -8,7 +8,7 @@
   "spacing": 2,
 
   "modules-left": ["hyprland/workspaces", "custom/sysmon"],
-  "modules-center": ["clock"],
+  "modules-center": ["custom/timer", "clock"],
   "modules-right": [
     "tray",
     "custom/todo",
@@ -115,7 +115,7 @@
 
   "custom/todo": {
     "format": "󱗝 {}",
-    "exec": "python3 ~/.local/bin/todohelper.py",
+    "exec": "python3 ~/.config/waybar/scripts/todohelper.py",
     "interval": 20,
     "return-type": "json",
     "on-click": "zeditor -n ~/.todo",
@@ -124,8 +124,18 @@
   "custom/sysmon": {
     "format": " 󰣇 ",
     "class": "no-crop",
-    "exec": "~/.local/bin/sysmon",
+    "exec": "~/.config/waybar/scripts/sysmon.sh",
     "interval": 2,
     "return-type": "json",
+  },
+
+  "custom/timer": {
+    "exec": "python3 ~/.config/waybar/scripts/timer.py",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "python3 ~/.config/waybar/scripts/timer.py toggle",
+    "on-click-right": "python3 ~/.config/waybar/scripts/timer.py reset",
+    "on-scroll-up": "python3 ~/.config/waybar/scripts/timer.py add 1",
+    "on-scroll-down": "python3 ~/.config/waybar/scripts/timer.py add -1",
   },
 }
