@@ -7,7 +7,7 @@
   "margin-right": 8,
   "spacing": 2,
 
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": ["hyprland/workspaces", "custom/sysmon"],
   "modules-center": ["clock"],
   "modules-right": [
     "tray",
@@ -16,7 +16,7 @@
     "network",
     "pulseaudio",
     "battery",
-    "custom/notification"
+    "custom/notification",
   ],
 
   "hyprland/workspaces": {
@@ -26,7 +26,7 @@
     "on-click": "activate",
     "format": "{name}",
     "on-scroll-up": "hyprctl dispatch workspace e-1",
-    "on-scroll-down": "hyprctl dispatch workspace e+1"
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
   },
 
   "clock": {
@@ -43,33 +43,33 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
-    }
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
   },
 
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "󰈈",
-      "deactivated": "󰈉"
-    }
+      "deactivated": "󰈉",
+    },
   },
 
   "tray": {
     "icon-size": 16,
-    "spacing": 8
+    "spacing": 8,
   },
 
   "battery": {
     "states": {
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
     "format": "{icon} {capacity}%",
     "format-charging": "󱐋 {capacity}%",
     "format-plugged": " {capacity}%",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
   },
 
   "network": {
@@ -79,7 +79,7 @@
     "tooltip-format": "{ifname} via {ipaddr}",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
     "tooltip-format-ethernet": "{ifname}: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "on-click": "nm-connection-editor"
+    "on-click": "nm-connection-editor",
   },
 
   "pulseaudio": {
@@ -93,10 +93,10 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""]
+      "default": ["", "", ""],
     },
     "on-click": "pavucontrol",
-    "on-click-right": "~/.config/quickshell/toggle_audio.sh"
+    "on-click-right": "~/.config/quickshell/toggle_audio.sh",
   },
 
   "custom/notification": {
@@ -107,10 +107,10 @@
       "notification": "󱅫",
       "none": "󰂚",
       "dnd-none": "󰂛",
-      "dnd-notification": "󱅫"
+      "dnd-notification": "󱅫",
     },
     "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw"
+    "on-click-right": "swaync-client -d -sw",
   },
 
   "custom/todo": {
@@ -118,6 +118,14 @@
     "exec": "python3 ~/.local/bin/todohelper.py",
     "interval": 20,
     "return-type": "json",
-    "on-click": "zeditor -n ~/.todo"
-  }
+    "on-click": "zeditor -n ~/.todo",
+  },
+
+  "custom/sysmon": {
+    "format": " 󰣇 ",
+    "class": "no-crop",
+    "exec": "~/.local/bin/sysmon",
+    "interval": 2,
+    "return-type": "json",
+  },
 }
