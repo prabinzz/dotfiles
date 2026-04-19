@@ -20,6 +20,7 @@ PACKAGES=(
   qt6-wayland
   brightnessctl
   pamixer
+  playerctl
   jq
   fzf
   swaync

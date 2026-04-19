@@ -6,3 +6,5 @@ eval "$(starship init zsh)"
 
 # zoxide setup
 eval "$(zoxide init zsh)"
+
+export TERMINAL=kitty
