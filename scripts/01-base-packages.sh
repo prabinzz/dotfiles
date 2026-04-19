@@ -11,7 +11,7 @@ PACKAGES=(
   swww
   xdg-desktop-portal-hyprland
   kitty
-  nautilus
+  dolphin
   neovim
   ttf-jetbrains-mono-nerd
   noto-fonts-emoji
