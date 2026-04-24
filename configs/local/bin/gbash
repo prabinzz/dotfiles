@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+import os
+import sys
+import json
+import requests
+
+# Constants
+API_KEY = os.environ.get("GEMINI_API_KEY")
+
+# Colors
+GREEN = "\033[0;32m"
+BOLD = "\033[1m"
+RESET = "\033[0m"
+
+def get_shell_script(prompt):
+    if not API_KEY:
+        print("Error: GEMINI_API_KEY environment variable not set.")
+        sys.exit(1)
+
+    # Fallback chain for models
+    models = [
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-3.1-flash-lite-preview",
+        "gemini-flash-latest"
+    ]
+    
+    system_instruction = (
+        "You are a professional shell script generator. "
+        "Return a JSON object with 'explanation' and 'command' keys. "
+        "The 'explanation' should be concise and professional. "
+        "The 'command' should be the actual shell command(s) or script. "
+        "Do not include markdown code blocks (```) in the command string."
+    )
+
+    last_error = None
+    for model in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
+        payload = {
+            "contents": [{"parts": [{"text": f"User request: {prompt}"}]}],
+            "system_instruction": {"parts": [{"text": system_instruction}]},
+            "generationConfig": {"response_mime_type": "application/json"}
+        }
+
+        try:
+            response = requests.post(url, json=payload, timeout=30)
+            if response.status_code in [503, 429]: # Unavailable or Rate Limited
+                continue
+            
+            response.raise_for_status()
+            data = response.json()
+            
+            # Extract content
+            text_response = data['candidates'][0]['content']['parts'][0]['text']
+            result = json.loads(text_response)
+            
+            return result.get("explanation"), result.get("command")
+        except Exception as e:
+            last_error = e
+            continue
+
+    print(f"Error calling Gemini API after trying multiple models. Last error: {last_error}")
+    sys.exit(1)
+
+def main():
+    if len(sys.argv) < 2:
+        print(f"Usage: {os.path.basename(sys.argv[0])} <prompt>")
+        sys.exit(1)
+
+    prompt = " ".join(sys.argv[1:])
+    
+    # Progress indicator (optional, but professional)
+    print(f"Generating script for: {prompt}...", end="\r", flush=True)
+    
+    explanation, command = get_shell_script(prompt)
+    
+    # Clear line
+    print(" " * (len(prompt) + 25), end="\r")
+    
+    # Print Output
+    print(f"\n{BOLD}Explanation:{RESET}")
+    print(f"{explanation}\n")
+    
+    print(f"{BOLD}Command:{RESET}")
+    print(f"{GREEN}{command}{RESET}\n")
+
+if __name__ == "__main__":
+    main()
