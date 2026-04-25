@@ -45,6 +45,8 @@ window#waybar {
 }
 
 #workspaces button {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     padding: 0px 5px;
     margin: 3px 1px;
     color: #6c7086;
@@ -52,12 +54,50 @@ window#waybar {
     font-size: 12px;
     border-radius: 8px;
     transition: all 0.2s ease;
+=======
+=======
+>>>>>>> Stashed changes
+  padding: 0px 3px;
+  margin: 1px 1px;
+  color: #6c7086;
+  background: transparent;
+  font-size: 11px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  min-width: 18px;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 }
 
+#workspaces button.occupied,
+#workspaces button:not(.empty):not(.active) {
+  color: @foreground;
+  background-color: @secondary_trans;
+  border-bottom: 2px solid @primary;
+}
+
+#workspaces button.empty {
+  color: #6c7086;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+}
+
+/* Active MUST come last to override .empty when workspace is both active + empty */
 #workspaces button.active {
+<<<<<<< Updated upstream
     color: @background;
     background-color: @primary;
     padding: 0px 8px;
+=======
+  color: @background;
+  background-color: @primary;
+  padding: 0px 5px;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 }
 
 #workspaces button.urgent {
@@ -66,11 +106,17 @@ window#waybar {
     padding: 0px 8px;
 }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #workspaces button:hover {
     color: @foreground;
     background: rgba(255, 255, 255, 0.1);
 }
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 /* --- Individual Module Colors --- */
 #clock {
     color: @background;
@@ -144,8 +190,18 @@ window#waybar {
 }
 
 @keyframes blink {
+<<<<<<< Updated upstream
     to {
         background-color: #ffffff;
         color: #000000;
     }
+=======
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 }
