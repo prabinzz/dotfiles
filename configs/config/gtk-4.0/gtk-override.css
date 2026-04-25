@@ -1,0 +1,54 @@
+/* Catppuccin Mocha Mauve - GTK4 Titlebar Overrides */
+
+headerbar {
+  background-color: #181825;
+  color: #cdd6f4;
+  border-bottom: 1px solid #313244;
+  box-shadow: none;
+  padding: 4px 8px;
+  min-height: 38px;
+}
+
+headerbar:backdrop {
+  background-color: #1e1e2e;
+  color: #6c7086;
+}
+
+headerbar .title { color: #cdd6f4; font-weight: bold; }
+headerbar:backdrop .title { color: #6c7086; }
+
+headerbar button.titlebutton {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 4px;
+  min-width: 16px;
+  min-height: 16px;
+  color: #6c7086;
+  box-shadow: none;
+}
+
+headerbar button.titlebutton:hover {
+  background-color: rgba(203, 166, 247, 0.15);
+  color: #cba6f7;
+}
+
+headerbar button.titlebutton.close:hover {
+  background-color: rgba(243, 139, 168, 0.2);
+  color: #f38ba8;
+}
+
+headerbar button.titlebutton.maximize:hover {
+  background-color: rgba(166, 227, 161, 0.2);
+  color: #a6e3a1;
+}
+
+headerbar button.titlebutton.minimize:hover {
+  background-color: rgba(249, 226, 175, 0.2);
+  color: #f9e2af;
+}
+
+window.csd {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 0 1px #45475a;
+}

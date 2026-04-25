@@ -1,0 +1,86 @@
+/* Import system theme first */
+@import "/usr/share/themes/catppuccin-mocha-mauve-standard+default/gtk-4.0/gtk.css";
+
+/* === Catppuccin Mocha Mauve Titlebar Override === */
+
+headerbar {
+  background-color: #181825;
+  color: #cdd6f4;
+  border: none;
+  border-bottom: 1px solid #313244;
+  box-shadow: none;
+  padding: 4px 8px;
+  min-height: 36px;
+}
+
+headerbar:backdrop {
+  background-color: #1e1e2e;
+  color: #585b70;
+}
+
+headerbar .title {
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+headerbar:backdrop .title {
+  color: #585b70;
+}
+
+headerbar .subtitle {
+  font-size: 11px;
+  color: #a6adc8;
+}
+
+/* Base titlebutton style — round, flat */
+headerbar button.titlebutton {
+  background: rgba(88, 91, 112, 0.4);
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  min-width: 14px;
+  min-height: 14px;
+  margin: 2px 3px;
+  box-shadow: none;
+  color: transparent;
+  -gtk-icon-size: 0px;
+}
+
+/* Minimize — green */
+headerbar button.titlebutton.minimize {
+  background-color: #a6e3a1;
+}
+headerbar button.titlebutton.minimize:hover {
+  background-color: #94d89f;
+}
+headerbar button.titlebutton.minimize:active {
+  background-color: #7bc87a;
+}
+
+/* Maximize — red */
+headerbar button.titlebutton.maximize {
+  background-color: #f38ba8;
+}
+headerbar button.titlebutton.maximize:hover {
+  background-color: #eb7a96;
+}
+headerbar button.titlebutton.maximize:active {
+  background-color: #d96a84;
+}
+
+/* Close — same red */
+headerbar button.titlebutton.close {
+  background-color: #f38ba8;
+}
+headerbar button.titlebutton.close:hover {
+  background-color: #eb7a96;
+}
+headerbar button.titlebutton.close:active {
+  background-color: #d96a84;
+}
+
+/* Window border */
+window.csd {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 0 1px #45475a;
+}
