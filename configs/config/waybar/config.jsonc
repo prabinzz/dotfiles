@@ -6,14 +6,6 @@
   "margin-left": 8,
   "margin-right": 8,
   "spacing": 2,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["clock"],
-=======
-=======
->>>>>>> Stashed changes
   "modules-left": [
     "niri/workspaces",
     "custom/sysmon",
@@ -22,10 +14,6 @@
   "modules-center": [
     "clock"
   ],
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   "modules-right": [
     "tray",
     "custom/todo",
@@ -37,20 +25,9 @@
   ],
   "niri/workspaces": {
     "format": "{name}",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    "on-scroll-up": "hyprctl dispatch workspace e-1",
-    "on-scroll-down": "hyprctl dispatch workspace e+1"
-=======
     "on-scroll-up": "niri msg action focus-workspace-up",
     "on-scroll-down": "niri msg action focus-workspace-down",
     "on-click": "activate"
->>>>>>> Stashed changes
-=======
-    "on-scroll-up": "niri msg action focus-workspace-up",
-    "on-scroll-down": "niri msg action focus-workspace-down",
-    "on-click": "activate"
->>>>>>> Stashed changes
   },
   "clock": {
     "format": "󰥔 {:%H:%M}",
@@ -88,38 +65,16 @@
     },
     "format": "{icon} {capacity}%",
     "format-charging": "󱐋 {capacity}%",
-    "format-plugged": " {capacity}%",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+    "format-plugged": " {capacity}%",
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-=======
-=======
->>>>>>> Stashed changes
-    "format-icons": [
-      "󰂎",
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
-    ],
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   },
   "network": {
     "format-wifi": "󰤨",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
     "tooltip-format": "{ifname} via {ipaddr}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "tooltip-format-ethernet": "{ifname}: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\nIP: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "tooltip-format-ethernet": "{ifname}: {ipaddr}\n {bandwidthDownBytes}  {bandwidthUpBytes}",
     "on-click": "nm-connection-editor"
   },
   "pulseaudio": {
@@ -127,27 +82,13 @@
     "format-bluetooth": "󰂰 {volume}%",
     "format-muted": "󰝟",
     "format-icons": {
-      "headphone": "",
+      "headphone": "",
       "hands-free": "󰂑",
       "headset": "󰂑",
-      "phone": "",
-      "portable": "",
-      "car": "",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "default": ["", "", ""]
-=======
-=======
->>>>>>> Stashed changes
-      "default": [
-        "",
-        "",
-        ""
-      ],
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
     },
     "on-click": "pavucontrol",
     "on-click-right": "~/.config/quickshell/toggle_audio.sh"
@@ -167,22 +108,17 @@
   },
   "custom/todo": {
     "format": "󱗝 {}",
-    "exec": "python3 ~/.local/bin/todohelper.py",
+    "exec": "python3 ~/.config/waybar/scripts/todohelper.py",
     "interval": 20,
     "return-type": "json",
-<<<<<<< Updated upstream
     "on-click": "zeditor -n ~/.todo"
-  }
-}
-=======
-    "on-click": "zeditor -n ~/.todo",
   },
   "custom/sysmon": {
     "format": "󰣇 {}",
     "class": "no-crop",
     "exec": "~/.config/waybar/scripts/sysmon.sh",
     "interval": 2,
-    "return-type": "json",
+    "return-type": "json"
   },
   "custom/timer": {
     "exec": "python3 ~/.config/waybar/scripts/timer.py",
@@ -191,11 +127,6 @@
     "on-click": "python3 ~/.config/waybar/scripts/timer.py toggle",
     "on-click-right": "python3 ~/.config/waybar/scripts/timer.py reset",
     "on-scroll-up": "python3 ~/.config/waybar/scripts/timer.py add 60",
-    "on-scroll-down": "python3 ~/.config/waybar/scripts/timer.py add -60",
-  },
-<<<<<<< Updated upstream
+    "on-scroll-down": "python3 ~/.config/waybar/scripts/timer.py add -60"
+  }
 }
->>>>>>> Stashed changes
-=======
-}
->>>>>>> Stashed changes

@@ -6,17 +6,17 @@
 @define-color primary_trans rgba(203, 166, 247, 0.8);
 
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", "Roboto", "Helvetica", "Arial", sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
-    color: @foreground;
+  background: transparent;
+  color: @foreground;
 }
 
 /* --- Modules Styling --- */
@@ -26,37 +26,27 @@ window#waybar {
 #network,
 #pulseaudio,
 #custom-todo,
+#custom-timer,
+#custom-sysmon,
 #tray,
 #idle_inhibitor,
 #custom-notification {
-    background-color: @bg_trans;
-    color: @foreground;
-    padding: 0px 10px;
-    margin: 3px 2px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: @bg_trans;
+  color: @foreground;
+  padding: 0px 10px;
+  margin: 3px 2px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* --- Workspaces --- */
 #workspaces {
-    background: @bg_trans;
-    padding: 0px 2px;
+  background: @bg_trans;
+  padding: 0px 2px;
 }
 
 #workspaces button {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    padding: 0px 5px;
-    margin: 3px 1px;
-    color: #6c7086;
-    background: transparent;
-    font-size: 12px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-=======
-=======
->>>>>>> Stashed changes
   padding: 0px 3px;
   margin: 1px 1px;
   color: #6c7086;
@@ -65,10 +55,6 @@ window#waybar {
   border-radius: 4px;
   transition: all 0.2s ease;
   min-width: 18px;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 #workspaces button.occupied,
@@ -86,91 +72,101 @@ window#waybar {
 
 /* Active MUST come last to override .empty when workspace is both active + empty */
 #workspaces button.active {
-<<<<<<< Updated upstream
-    color: @background;
-    background-color: @primary;
-    padding: 0px 8px;
-=======
   color: @background;
   background-color: @primary;
   padding: 0px 5px;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
 
 #workspaces button.urgent {
-    color: @background;
-    background-color: @alert;
-    padding: 0px 8px;
+  color: @background;
+  background-color: @alert;
+  padding: 0px 8px;
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-#workspaces button:hover {
-    color: @foreground;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 /* --- Individual Module Colors --- */
 #clock {
-    color: @background;
-    background-color: @primary_trans;
-    padding-left: 12px;
-    padding-right: 12px;
+  color: @background;
+  background-color: @primary_trans;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 #pulseaudio {
-    color: @primary;
-    background-color: @secondary_trans;
+  color: @primary;
+  background-color: @secondary_trans;
 }
 
 #network {
-    color: @success;
-    background-color: @secondary_trans;
+  color: @success;
+  background-color: @secondary_trans;
 }
 
 #battery {
-    color: @foreground;
-    background-color: @secondary_trans;
+  color: @foreground;
+  background-color: @secondary_trans;
 }
 
-#battery.charging, #battery.plugged {
-    color: @success;
+#battery.charging,
+#battery.plugged {
+  color: @success;
 }
 
 #battery.critical:not(.charging) {
-    background-color: @alert;
-    color: @background;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @alert;
+  color: @background;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #custom-todo {
-    color: @foreground;
-    background-color: @secondary_trans;
+  color: @foreground;
+  background-color: @secondary_trans;
+}
+
+#custom-timer {
+  color: @foreground;
+  background-color: @secondary_trans;
+}
+
+#custom-timer.work {
+  color: @background;
+  background-color: @success;
+}
+
+#custom-timer.break {
+  color: @background;
+  background-color: @primary;
+}
+
+#custom-timer.warning {
+  color: @background;
+  background-color: @alert;
+}
+
+#custom-timer.paused {
+  color: @alert;
+}
+
+#custom-sysmon {
+  color: @primary;
+  background-color: @secondary_trans;
 }
 
 #idle_inhibitor {
-    color: #fab387; 
-    background-color: @secondary_trans;
+  color: #fab387;
+  background-color: @secondary_trans;
 }
 
 #custom-notification {
-    color: @primary;
-    background-color: @secondary_trans;
+  color: @primary;
+  background-color: @secondary_trans;
 }
 
 #tray {
-    background-color: @secondary_trans;
+  background-color: @secondary_trans;
 }
 
 /* --- Interactions --- */
@@ -180,28 +176,20 @@ window#waybar {
 #network:hover,
 #pulseaudio:hover,
 #custom-todo:hover,
+#custom-timer:hover,
+#custom-sysmon:hover,
 #idle_inhibitor:hover,
 #custom-notification:hover {
-    background-color: rgba(69, 71, 90, 0.9);
+  background-color: rgba(69, 71, 90, 0.9);
 }
 
 #clock:hover {
-    background-color: rgba(203, 166, 247, 1.0);
+  background-color: rgba(203, 166, 247, 1);
 }
 
 @keyframes blink {
-<<<<<<< Updated upstream
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-=======
   to {
     background-color: #ffffff;
     color: #000000;
   }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
