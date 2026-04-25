@@ -200,10 +200,10 @@ binds {
     XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
 
-    Mod+WheelScrollDown cooldown-millis=150 { focus-column-right; }
-    Mod+WheelScrollUp   cooldown-millis=150 { focus-column-left; }
-    Mod+Shift+WheelScrollDown cooldown-millis=150 { focus-workspace-down; }
-    Mod+Shift+WheelScrollUp   cooldown-millis=150 { focus-workspace-up; }
+    Mod+WheelScrollDown { focus-column-right; }
+    Mod+WheelScrollUp   { focus-column-left; }
+    Mod+Shift+WheelScrollDown { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp   { focus-workspace-up; }
 
     Mod+N { spawn "swaync-client" "-t" "-sw"; }
     Mod+Shift+P { spawn "/home/prabin/.config/niri/scripts/monitor-switch.sh"; }
