@@ -11,6 +11,7 @@ input {
     }
     mouse {
         accel-profile "flat"
+        scroll-factor 0.5
     }
     focus-follows-mouse max-scroll-amount="0%"
 }
@@ -56,7 +57,7 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     XDG_SESSION_TYPE "wayland"
-    
+
     // NVIDIA Specific
     LIBVA_DRIVER_NAME "nvidia"
     GBM_BACKEND "nvidia-drm"
@@ -151,7 +152,7 @@ binds {
     Mod+B { spawn "helium-browser"; }
     Mod+G { spawn "helium-browser" "--app=gemini.google.com"; }
     Mod+Shift+Delete { spawn "wlogout"; }
-    
+
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
 
@@ -221,6 +222,6 @@ binds {
     Mod+Shift+Print { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh crop_and_edit"; }
     Print { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh full_and_copy"; }
     Shift+Print { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh full_and_edit"; }
-    
+
     Mod+V { toggle-window-floating; }
 }
