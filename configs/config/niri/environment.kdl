@@ -1,0 +1,22 @@
+environment {
+    GTK_THEME "catppuccin-mocha-mauve-standard+default"
+    QT_QPA_PLATFORMTHEME "kde"
+    QT_QPA_PLATFORM "wayland;xcb"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+    ICON_THEME "Adwaita"
+    XCURSOR_THEME "default"
+    XCURSOR_SIZE "24"
+    HYPRCURSOR_THEME "default"
+    HYPRCURSOR_SIZE "24"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
+
+    // NVIDIA Specific
+    LIBVA_DRIVER_NAME "nvidia"
+    GBM_BACKEND "nvidia-drm"
+    __GLX_VENDOR_LIBRARY_NAME "nvidia"
+    WLR_NO_HARDWARE_CURSORS "1"
+    WLR_DRM_NO_ATOMIC "1"
+}

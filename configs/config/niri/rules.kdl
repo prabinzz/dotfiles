@@ -1,0 +1,48 @@
+// Global geometry defaults
+window-rule {
+    geometry-corner-radius 0
+    clip-to-geometry true
+}
+
+// Float system dialogs and settings windows
+window-rule {
+    match app-id="^org\\.pulseaudio\\.pavucontrol$"
+    match app-id="^nm-connection-editor$"
+    match app-id="^blueman-manager$"
+    match app-id="^kvantummanager$"
+    match app-id="^qt5ct$"
+    match app-id="^qt6ct$"
+    match app-id="^nwg-look$"
+    match app-id="^org\\.kde\\.polkit-kde-authentication-agent-1$"
+    match app-id="^it\\.miyakogi\\.copyq$"
+    match title="^File Operation Progress$"
+    match title="^Open File.*$"
+    match title="^Select a File.*$"
+    match title="^Choose wallpaper.*$"
+    match title="^Open Folder.*$"
+    match title="^Save As.*$"
+    match title="^Library.*$"
+    match title="^File Upload.*$"
+    match title="^.*Settings.*$"
+    match title="^.*Preferences.*$"
+    open-floating true
+}
+
+// Scratchpad terminal
+window-rule {
+    match app-id="scratchpad"
+    open-floating true
+    default-column-width { proportion 0.8; }
+}
+
+// Floating monitor window (fullscreen)
+window-rule {
+    match app-id="floating_monitor"
+    open-fullscreen true
+}
+
+// Picture-in-Picture
+window-rule {
+    match title="^Picture-in-Picture$"
+    open-floating true
+}

@@ -1,0 +1,15 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+    touchpad {
+        tap
+    }
+    mouse {
+        accel-profile "flat"
+        scroll-factor 0.8
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+}
