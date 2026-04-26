@@ -81,8 +81,8 @@ binds {
     Mod+Shift+P   { spawn "/home/prabin/.config/niri/scripts/monitor-switch.sh"; }
     Mod+Tab       { toggle-overview; }
     Alt+Tab       { spawn "rofi" "-show" "window" "-theme" "~/.config/rofi/launcher.rasi"; }
-    Mod+M         { spawn "/home/prabin/.config/niri/scripts/minimize_window.sh"; }
-    Mod+R         { spawn "/home/prabin/.config/niri/scripts/restore_window.sh"; }
+    Mod+M         { maximize-window-to-edges; }
+    Mod+R         { switch-preset-column-width; }
     Mod+Shift+V   { spawn "rofi" "-modi" "clipboard:greenclip print" "-show" "clipboard" "-run-command" "{cmd}"; }
     Mod+Shift+Comma { spawn "rofi" "-modi" "emoji" "-show" "emoji"; }
     Mod+Shift+W   { spawn "/home/prabin/.config/niri/scripts/random_wallpaper.sh"; }
