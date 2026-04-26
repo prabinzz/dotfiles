@@ -46,3 +46,10 @@ window-rule {
     match title="^Picture-in-Picture$"
     open-floating true
 }
+
+// Block sensitive windows from screenshots
+window-rule {
+    match app-id="^it\\.miyakogi\\.copyq$"
+    match app-id="^org\\.kde\\.polkit-kde-authentication-agent-1$"
+    block-out-from "screen-capture"
+}

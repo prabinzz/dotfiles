@@ -1,3 +1,5 @@
+// niri scripts and plugins 
+spawn-at-startup "python3" "~/.config/niri/scripts/niri_tweaks/niri_tile_to_n.py"
 // GTK / theme settings
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "catppuccin-mocha-mauve-standard+default"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Adwaita"

@@ -1,4 +1,5 @@
 // Niri configuration — entry point
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 prefer-no-csd
 
 include "animations.kdl"

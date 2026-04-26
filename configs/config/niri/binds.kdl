@@ -88,8 +88,8 @@ binds {
     Mod+Shift+W   { spawn "/home/prabin/.config/niri/scripts/random_wallpaper.sh"; }
 
     // Screenshots
-    Mod+Print       { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh crop_and_copy"; }
-    Mod+Shift+Print { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh crop_and_edit"; }
-    Print           { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh full_and_copy"; }
-    Shift+Print     { spawn "sh" "-c" "~/.config/niri/scripts/screenshot.sh full_and_edit"; }
+    Mod+Print       { screenshot; }
+    Mod+Shift+Print { screenshot-window; }
+    Print           { screenshot-screen; }
+    Shift+Print     { screenshot; }
 }

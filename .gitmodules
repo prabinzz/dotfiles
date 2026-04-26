@@ -1,0 +1,3 @@
+[submodule "configs/config/niri/scripts/niri_tweaks"]
+	path = configs/config/niri/scripts/niri_tweaks
+	url = https://github.com/niri-wm/niri.git
