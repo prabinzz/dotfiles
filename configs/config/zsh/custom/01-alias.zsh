@@ -16,4 +16,7 @@ alias gc='git commit'
 alias gp='git push'
 alias gl='git log --oneline --graph --decorate'
 
+# tmux 
+alias ta='tmux a || tmux'
+
 alias hotspot-on='sudo create_ap --no-virt --freq-band 2.4 wlan0 enp8s0 Prabin 12345678'

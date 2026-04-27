@@ -78,14 +78,14 @@ binds {
 
     // Utilities
     Mod+N         { spawn "swaync-client" "-t" "-sw"; }
-    Mod+Shift+P   { spawn "/home/prabin/.config/niri/scripts/monitor-switch.sh"; }
+    Mod+Shift+P   { spawn-sh "/home/prabin/.config/niri/scripts/monitor-switch.sh"; }
     Mod+Tab       { toggle-overview; }
     Alt+Tab       { spawn "rofi" "-show" "window" "-theme" "~/.config/rofi/launcher.rasi"; }
     Mod+M         { maximize-window-to-edges; }
     Mod+R         { switch-preset-column-width; }
     Mod+Shift+V   { spawn "rofi" "-modi" "clipboard:greenclip print" "-show" "clipboard" "-run-command" "{cmd}"; }
     Mod+Shift+Comma { spawn "rofi" "-modi" "emoji" "-show" "emoji"; }
-    Mod+Shift+W   { spawn "/home/prabin/.config/niri/scripts/random_wallpaper.sh"; }
+    Mod+Shift+W   { spawn-sh "/home/prabin/.config/niri/scripts/random_wallpaper.sh"; }
 
     // Screenshots
     Mod+Print       { screenshot; }

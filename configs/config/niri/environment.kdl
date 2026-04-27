@@ -12,6 +12,8 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     XDG_SESSION_TYPE "wayland"
+    GTK_USE_PORTAL "1"
+    XDG_MENU_PREFIX "plasma-"
 
     // NVIDIA Specific
     LIBVA_DRIVER_NAME "nvidia"
