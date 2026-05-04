@@ -1,21 +1,20 @@
 environment {
-    GTK_THEME "catppuccin-mocha-mauve-standard+default"
-    QT_QPA_PLATFORMTHEME "kde"
+    GTK_THEME "Breeze-Dark"
+    QT_QPA_PLATFORMTHEME "qt6ct"
     QT_QPA_PLATFORM "wayland;xcb"
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     QT_AUTO_SCREEN_SCALE_FACTOR "1"
-    ICON_THEME "Adwaita"
-    XCURSOR_THEME "default"
+    ICON_THEME "breeze-dark"
+    XCURSOR_THEME "breeze_cursors"
     XCURSOR_SIZE "24"
-    HYPRCURSOR_THEME "default"
+    HYPRCURSOR_THEME "breeze_cursors"
     HYPRCURSOR_SIZE "24"
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     XDG_SESSION_TYPE "wayland"
     GTK_USE_PORTAL "1"
-    XDG_MENU_PREFIX "plasma-"
 
-    // NVIDIA Specific
+    //NVIDIA Specific
     LIBVA_DRIVER_NAME "nvidia"
     GBM_BACKEND "nvidia-drm"
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
