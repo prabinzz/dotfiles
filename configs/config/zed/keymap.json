@@ -10,6 +10,8 @@
     "context": "Workspace",
     "bindings": {
       "shift shift": "file_finder::Toggle",
+      "ctrl \\": "project_panel::CollapseAllEntries",
+      "ctrl-shift-r": "pane::RevealInProjectPanel",
     },
   },
   {
@@ -29,8 +31,9 @@
       "ctrl-[": "editor::Fold",
       "ctrl-]": "editor::UnfoldLines",
       "space w": "pane::CloseActiveItem",
-      "space w w": "pane::CloseOtherItems"
-
+      "space w w": "pane::CloseOtherItems",
+      "space b": "tab_switcher::Toggle",
+      "space b d": "pane::CloseActiveItem",
     },
   },
 ]
