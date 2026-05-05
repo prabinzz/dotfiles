@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Debug current C++ file",
+    "build": {
+      "command": "g++",
+      "args": [
+        "-g",
+        "-O0",
+        "${ZED_FILE}",
+        "-o",
+        "/tmp/zed_debug_prog"
+      ]
+    },
+    "program": "/tmp/zed_debug_prog",
+    "request": "launch",
+    "adapter": "CodeLLDB"
+  }
+]
