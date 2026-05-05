@@ -9,6 +9,7 @@ path+=(
     $HOME/.cargo/bin
     $HOME/.bun/bin
     $HOME/.cache/.bun/bin
+    $HOME/go/bin
 )
 
 # Export PATH

@@ -21,7 +21,7 @@
     "network",
     "pulseaudio",
     "battery",
-    "custom/notification"
+    "custom/notification",
   ],
   "niri/workspaces": {
     "format": "{name}",
@@ -43,25 +43,25 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
-    }
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "󰈈",
-      "deactivated": "󰈉"
-    }
+      "deactivated": "󰈉",
+    },
   },
   "tray": {
     "icon-size": 16,
-    "spacing": 8
+    "spacing": 8,
   },
   "battery": {
     "states": {
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
     "format": "{icon} {capacity}%",
     "format-charging": "󱐋 {capacity}%",
@@ -85,13 +85,13 @@
       "headphone": "",
       "hands-free": "󰂑",
       "headset": "󰂑",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
     },
     "on-click": "pavucontrol",
-    "on-click-right": "~/.config/quickshell/toggle_audio.sh"
+    "on-click-right": "~/.config/quickshell/toggle_audio.sh",
   },
   "custom/notification": {
     "exec": "swaync-client -swb",
@@ -101,18 +101,19 @@
       "notification": "󱅫",
       "none": "󰂚",
       "dnd-none": "󰂛",
-      "dnd-notification": "󱅫"
+      "dnd-notification": "󱅫",
     },
     "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw"
+    "on-click-right": "swaync-client -d -sw",
   },
   "custom/todo": {
     "format": "󱗝 {}",
     "exec": "python3 ~/.config/waybar/scripts/todohelper.py",
     "interval": 20,
     "return-type": "json",
-    "on-click": "zeditor -n ~/.todo"
+    "on-click": "zeditor -n ~/.todo",
   },
+
   "custom/sysmon": {
     "format": "󰣇 {}",
     "class": "no-crop",

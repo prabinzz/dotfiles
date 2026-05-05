@@ -11,7 +11,7 @@ PACKAGES=(
   swww
   xdg-desktop-portal-hyprland
   kitty
-  nautilus
+  dolphin
   neovim
   ttf-jetbrains-mono-nerd
   noto-fonts-emoji
@@ -20,6 +20,7 @@ PACKAGES=(
   qt6-wayland
   brightnessctl
   pamixer
+  playerctl
   jq
   fzf
   swaync
