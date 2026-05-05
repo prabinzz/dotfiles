@@ -130,6 +130,7 @@ else
   
   run_script "01-base-packages.sh"
   run_script "02-aur-packages.sh"
+  run_script "17-fix-portals.sh"
   
   # Always run config sync last
   run_script "$CONFIG_SCRIPT"
