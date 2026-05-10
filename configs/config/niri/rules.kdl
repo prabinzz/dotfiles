@@ -148,11 +148,6 @@ window-rule {
     open-floating true
 }
 
-// Layer rules for common components
-layer-rule {
-    match namespace="^waybar$"
-    block-out-from "screen-capture"
-}
 
 layer-rule {
     match namespace="^swaync$"
@@ -164,11 +159,6 @@ layer-rule {
     block-out-from "screen-capture"
 }
 
-layer-rule {
-    match namespace="^launcher$" // rofi/wofi/fuzzel/wlogout
-    match namespace="^wlogout$"
-    block-out-from "screen-capture"
-}
 
 layer-rule {
     match namespace="^lockscreen$"

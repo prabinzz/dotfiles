@@ -34,6 +34,7 @@
       "space w w": "pane::CloseOtherItems",
       "space b": "tab_switcher::Toggle",
       "space b d": "pane::CloseActiveItem",
+      "ctrl-a": "editor::SelectAll",
     },
   },
 ]
