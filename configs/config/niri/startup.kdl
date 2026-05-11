@@ -1,4 +1,4 @@
-// niri scripts and plugins 
+// niri scripts and plugins
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "python3" "~/.config/niri/scripts/niri_tweaks/niri_tile_to_n.py"
 // GTK / theme settings
@@ -16,6 +16,7 @@ spawn-at-startup "swaync"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "nm-applet"
 spawn-at-startup "blueman-applet"
+spawn-at-startup "conky"
 
 // Screen sharing fix
 spawn-at-startup "sh" "-c" "systemctl --user restart xdg-desktop-portal xdg-desktop-portal-gnome"

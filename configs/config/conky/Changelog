@@ -1,0 +1,39 @@
+Changelog
+--------------------------------------------------------
+Botein - Conky Theme
+[ Taurus Themes Pack ] 
+
+by Closebox73
+
+Social
+X			: https://twitter.com/closebox73
+Discord		: https://discord.com/users/1115644269802311750
+Pling		: https://pling.com/u/closebox73x
+Mastodon	: https://mastodon.social/@closebox73
+--------------------------------------------------------
+
+v3.2
+date : 14 Jun 2025
+-	New weather.sh v3.0
+-	Some minor change
+
+
+v2.8
+date : 09 Dec 2023
+-	Add line draw_blended in conky config due transparent image issue in Gnome & KDE
+-	Some minor change
+
+
+v2.0
+date : 07 Feb 2023
+-	Add override_utf8_locale line
+-	Change main color
+-	Add License
+-	Add Changelog file
+-	A few changes to the script
+-	Minimize archive size
+
+
+v1.0
+date : 10 Agt 2022
+-	Initial release
