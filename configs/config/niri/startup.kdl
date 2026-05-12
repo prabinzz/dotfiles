@@ -8,8 +8,10 @@ spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "cursor-theme" 
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "color-scheme" "prefer-dark"
 
 // Daemons & system tray
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
+spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-at-startup "awww-daemon"
+spawn-at-startup "bash" "~/.config/niri/scripts/workspace-wallpaper.sh"
 spawn-at-startup "greenclip" "daemon"
 spawn-at-startup "hypridle" "-c" "~/.config/niri/niri-idle.conf"
 spawn-at-startup "swaync"
