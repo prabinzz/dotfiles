@@ -9,10 +9,10 @@
 {
   // --- UI & Appearance ---
   "ui_font_family": "JetBrainsMono Nerd Font",
-  "ui_font_size": 17.0,
+  "ui_font_size": 16.0,
   "ui_font_weight": 600.0,
   "buffer_font_family": "JetBrainsMono Nerd Font",
-  "buffer_font_size": 17.0,
+  "buffer_font_size": 16.0,
   "buffer_font_weight": 400,
   "buffer_line_height": { "custom": 1.5 },
   "buffer_font_features": { "calt": false },
@@ -102,7 +102,7 @@
     "show_sign_in": false
   },
   "tab_bar": {
-    "show": false
+    "show": true,
   },
   "toolbar": {
     "quick_actions": false
