@@ -27,7 +27,7 @@ fi
 echo "Installing fnm (Fast Node Manager) via cargo..."
 if ! command -v cargo &>/dev/null; then
   echo "Error: cargo not found after rustup setup. Cannot proceed with fnm installation."
-  return 1
+  exit 1
 fi
 cargo install fnm
 
@@ -38,7 +38,7 @@ echo "Setting up fnm environment for the current shell session..."
 if ! command -v fnm &>/dev/null; then
   # fnm should be in ~/.cargo/bin, which is now sourced, but check again.
   echo "Error: fnm not found. Aborting Node installation."
-  return 1
+  exit 1
 fi
 eval "$(fnm env)"
 

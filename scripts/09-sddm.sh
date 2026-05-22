@@ -70,12 +70,12 @@ fi
 
 # Apply theme
 # We use sed to replace the Current=... line or append if not found.
-if grep -q "^[Theme]" /etc/sddm.conf 2>/dev/null; then
+if grep -q "^\[Theme\]" /etc/sddm.conf 2>/dev/null; then
     # Section exists, check if Current exists
     if grep -q "Current=" /etc/sddm.conf; then
         sudo sed -i 's/^Current=.*/Current=silent/' /etc/sddm.conf
     else
-        sudo sed -i '/^[Theme]/a Current=silent' /etc/sddm.conf
+        sudo sed -i '/^\[Theme\]/a Current=silent' /etc/sddm.conf
     fi
 else
     # Section doesn't exist, append it

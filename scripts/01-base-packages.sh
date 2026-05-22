@@ -3,10 +3,8 @@
 echo "Installing base packages..."
 
 PACKAGES=(
-  hyprland
   hypridle
   sddm
-  waybar
   rofi
   swww
   xdg-desktop-portal-hyprland
@@ -14,7 +12,6 @@ PACKAGES=(
   xdg-desktop-portal-gnome
   xdg-desktop-portal-gtk
   xdg-desktop-portal-wlr
-  gnome-desktop
   pipewire
   pipewire-pulse
   pipewire-alsa
@@ -42,6 +39,7 @@ PACKAGES=(
   wtype
   grim
   wl-clipboard
+  wl-mirror
   pavucontrol
   dnsmasq
   rustup
@@ -53,6 +51,9 @@ PACKAGES=(
   unzip
   zoxide
   rclone
+  conky
+  network-manager-applet
+  wlogout
 )
 
 sudo pacman -S --noconfirm --needed "${PACKAGES[@]}"

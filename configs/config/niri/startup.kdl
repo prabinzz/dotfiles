@@ -1,9 +1,6 @@
 // niri scripts and plugins
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
-// GTK / theme settings
-gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'  # or 'prefer-light'
 
 // Daemons & system tray
 // spawn-at-startup "waybar"

@@ -46,11 +46,29 @@ echo ""
 # Remove nouveau drivers
 sudo pacman -Rns --noconfirm xf86-video-nouveau 2>/dev/null || true
 
-# Install NVIDIA proprietary drivers
-# New/Fixed
+# Detect installed kernels and select appropriate headers
+HEADERS=()
+if pacman -Q linux &>/dev/null; then
+  HEADERS+=(linux-headers)
+fi
+if pacman -Q linux-lts &>/dev/null; then
+  HEADERS+=(linux-lts-headers)
+fi
+if pacman -Q linux-cachyos &>/dev/null; then
+  HEADERS+=(linux-cachyos-headers)
+fi
+if pacman -Q linux-zen &>/dev/null; then
+  HEADERS+=(linux-zen-headers)
+fi
+
+# Fallback to base linux-headers if no kernel package was matched (unlikely)
+if [ ${#HEADERS[@]} -eq 0 ]; then
+  HEADERS+=(linux-headers)
+fi
+
+echo "Installing NVIDIA proprietary drivers and matching headers: ${HEADERS[*]}"
 sudo pacman -S --needed \
-  linux-headers \
-  linux-lts-headers \
+  "${HEADERS[@]}" \
   nvidia-dkms \
   nvidia-utils \
   nvidia-settings \

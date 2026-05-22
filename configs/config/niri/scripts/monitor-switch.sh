@@ -16,6 +16,7 @@ get_external_monitors() {
 }
 
 laptop_only() {
+    pkill wl-mirror 2>/dev/null
     notify-send "Monitor Switch" "Switching to Laptop Only mode..."
     # Turn off all external monitors
     EXT_MONITORS=$(get_external_monitors)
@@ -28,6 +29,7 @@ laptop_only() {
 }
 
 external_only() {
+    pkill wl-mirror 2>/dev/null
     EXT_MONITORS=$(get_external_monitors)
     if [ -z "$EXT_MONITORS" ]; then
         notify-send "Monitor Switch" "No external monitor detected!" -u critical
@@ -50,6 +52,7 @@ external_only() {
 }
 
 dual_monitor() {
+    pkill wl-mirror 2>/dev/null
     EXT_MONITORS=$(get_external_monitors)
     if [ -z "$EXT_MONITORS" ]; then
         notify-send "Monitor Switch" "No external monitor detected!" -u critical
@@ -71,6 +74,11 @@ dual_monitor() {
 }
 
 mirror_mode() {
+    if ! command -v wl-mirror &>/dev/null; then
+        notify-send "Monitor Switch" "wl-mirror is not installed! Please run: sudo pacman -S wl-mirror" -u critical
+        exit 1
+    fi
+
     EXT_MONITORS=$(get_external_monitors)
     if [ -z "$EXT_MONITORS" ]; then
         notify-send "Monitor Switch" "No external monitor detected!" -u critical
@@ -83,8 +91,14 @@ mirror_mode() {
     notify-send "Monitor Switch" "Mirroring $LAPTOP to $SELECTED..."
     niri msg output "$LAPTOP" on
     niri msg output "$SELECTED" on
-    # Set position to 0,0 to overlap (niri mirroring)
-    niri msg output "$SELECTED" position set 0 0
+    niri msg output "$LAPTOP" position auto
+    niri msg output "$SELECTED" position auto
+    
+    # Kill any existing wl-mirror process
+    pkill wl-mirror 2>/dev/null
+    
+    # Run wl-mirror targeting the selected monitor as the fullscreen output, capturing the laptop display.
+    wl-mirror --fullscreen --fullscreen-output "$SELECTED" "$LAPTOP" &
 }
 
 # Menu

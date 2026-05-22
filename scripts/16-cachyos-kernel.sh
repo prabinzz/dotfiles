@@ -40,13 +40,13 @@ tar xvf "$TEMP_DIR/cachyos-repo.tar.xz" -C "$TEMP_DIR"
 
 echo "Running CachyOS repository setup..."
 echo "You may be prompted for your password."
-cd "$TEMP_DIR/cachyos-repo"
+cd "$TEMP_DIR/cachyos-repo" || { echo "Failed to enter cachyos-repo directory."; rm -rf "$TEMP_DIR"; exit 1; }
 sudo ./cachyos-repo.sh
 
 # Install Kernel
 echo "Installing CachyOS Kernel..."
 # Sync DB first
-sudo pacman -Sy
+sudo pacman -Syu
 
 echo "Installing linux-cachyos and headers..."
 sudo pacman -S --needed linux-cachyos linux-cachyos-headers

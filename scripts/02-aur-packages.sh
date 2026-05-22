@@ -19,6 +19,9 @@ AURPACKAGES=(
   bun-bin
   rofi-greenclip
   rofi-emoji
+  noctalia-shell
+  noctalia-qs
+  helium-browser-bin
 )
 
 yay -S --noconfirm --needed "${AURPACKAGES[@]}"
