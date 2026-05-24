@@ -352,7 +352,7 @@
         "predefinedScheme": "Catppuccin",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": true
+        "useWallpaperColors": false
     },
     "controlCenter": {
         "cards": [
@@ -752,6 +752,14 @@
             {
                 "enabled": true,
                 "id": "kcolorscheme"
+            },
+            {
+                "enabled": true,
+                "id": "niri"
+            },
+            {
+                "enabled": true,
+                "id": "kitty"
             }
         ],
         "enableUserTheming": false

@@ -7,9 +7,3 @@ font_size 12.0
 
 background_opacity 0.9
 window_padding_width 1 5
-
-
-# BEGIN_KITTY_THEME
-# Noctalia
-include current-theme.conf
-# END_KITTY_THEME
