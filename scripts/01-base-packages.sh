@@ -6,7 +6,7 @@ PACKAGES=(
   hypridle
   sddm
   rofi
-  swww
+  awww
   xdg-desktop-portal-hyprland
   niri
   xdg-desktop-portal-gnome
@@ -37,7 +37,6 @@ PACKAGES=(
   less
   slurp
   wtype
-  grim
   wl-clipboard
   wl-mirror
   pavucontrol
@@ -49,6 +48,7 @@ PACKAGES=(
   github-cli
   starship
   unzip
+  unrar
   zoxide
   rclone
   conky
