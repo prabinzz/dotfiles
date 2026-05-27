@@ -9,6 +9,7 @@ PACKAGES=(
   awww
   xdg-desktop-portal-hyprland
   niri
+  xdg-desktop-portal-kde
   xdg-desktop-portal-gnome
   xdg-desktop-portal-gtk
   xdg-desktop-portal-wlr
@@ -19,12 +20,20 @@ PACKAGES=(
   gst-plugin-pipewire
   kitty
   dolphin
+  plasma-integration
+  breeze
+  kio-extras
+  archlinux-xdg-menu
+  desktop-file-utils
+  shared-mime-info
   neovim
   ttf-jetbrains-mono-nerd
   noto-fonts-emoji
   polkit-gnome
   qt5-wayland
   qt6-wayland
+  qt5ct
+  qt6ct
   brightnessctl
   pamixer
   playerctl
