@@ -45,5 +45,7 @@ update-desktop-database ~/.local/share/applications
 sudo update-desktop-database /usr/share/applications
 update-mime-database ~/.local/share/mime
 sudo update-mime-database /usr/share/mime
+sudo ln -sf /etc/xdg/menus/arch-applications.menu /etc/xdg/menus/applications.menu
+XDG_MENU_PREFIX=arch- kbuildsycoca6 --noincremental
 
 echo "Portal fixes applied."

@@ -3,7 +3,7 @@
 echo "Installing gemini-cli..."
 
 if ! command -v bun &>/dev/null; then
-  echo "Error: bun is not installed. Please run 11-fnminstall.sh or install bun first."
+  echo "Error: bun is not installed. Please run fnminstall.sh or install bun first."
   exit 1
 fi
 

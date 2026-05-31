@@ -45,7 +45,7 @@ done
 
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS_DIR="$BASE_DIR/scripts"
-CONFIG_SCRIPT="07-copyconfigs.sh"
+CONFIG_SCRIPT="copyconfigs.sh"
 
 if [ ! -d "$SCRIPTS_DIR" ]; then
   echo "Scripts directory not found: $SCRIPTS_DIR" >&2
@@ -78,7 +78,7 @@ run_script() {
 }
 
 get_install_scripts() {
-  find "$SCRIPTS_DIR" -maxdepth 1 -type f -name "[0-9]*.sh" ! -name "$CONFIG_SCRIPT" -printf "%f\n" | sort
+  find "$SCRIPTS_DIR" -maxdepth 1 -type f -name "*.sh" ! -name "$CONFIG_SCRIPT" -printf "%f\n" | sort
 }
 
 select_scripts_tui() {
@@ -121,13 +121,11 @@ select_scripts_tui() {
     echo "No whiptail/dialog found; falling back to shell selection."
     echo "Install one of these for a real TUI checklist: sudo pacman -S libnewt dialog"
     echo ""
-    echo "Select scripts to run (numbers separated by spaces, 'a' for all, 'q' to cancel):"
+    echo "Select scripts to run (names separated by spaces, 'a' for all, 'q' to cancel):"
 
-    local i=1
     local script
     for script in "${all_scripts[@]}"; do
-      echo "$i) $script"
-      ((i++))
+      echo "- $script"
     done
 
     echo ""
@@ -136,13 +134,11 @@ select_scripts_tui() {
     if [[ "$user_input" == "a" ]]; then
       SELECTED_SCRIPTS=("${all_scripts[@]}")
     elif [[ "$user_input" != "q" ]]; then
-      local num idx
-      for num in $user_input; do
-        if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -ge 1 ] && [ "$num" -le "${#all_scripts[@]}" ]; then
-          idx=$((num - 1))
-          SELECTED_SCRIPTS+=("${all_scripts[$idx]}")
+      for name in $user_input; do
+        if [[ " ${all_scripts[*]} " =~ " $name " ]]; then
+          SELECTED_SCRIPTS+=("$name")
         else
-          echo "Ignoring invalid selection: $num"
+          echo "Ignoring invalid selection: $name"
         fi
       done
     fi
@@ -181,13 +177,13 @@ if [ "$sync_only" = true ]; then
 elif [ "$select_mode" = true ]; then
   run_selected_scripts
 else
-  # Default behavior: Base Packages + AUR Packages + Flatpak Packages + Config Sync
-  echo "Running default installation: Base Packages, AUR Packages, Flatpak Packages, and Config Sync."
+  # Default behavior: Run all found scripts then Config Sync
+  echo "Running all installation scripts and syncing configs."
 
-  run_script "01-base-packages.sh"
-  run_script "02-aur-packages.sh"
-  run_script "03-flatpak-packages.sh"
-  run_script "17-fix-portals.sh"
+  mapfile -t ALL_SCRIPTS < <(get_install_scripts)
+  for script in "${ALL_SCRIPTS[@]}"; do
+    run_script "$script"
+  done
 
   # Always run config sync last.
   run_script "$CONFIG_SCRIPT"

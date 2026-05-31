@@ -15,4 +15,4 @@ else
 fi
 
 echo "Tmux installation and setup complete."
-echo "Ensure you run scripts/07-copyconfigs.sh to apply the tmux configuration."
+echo "Ensure you run scripts/copyconfigs.sh to apply the tmux configuration."
